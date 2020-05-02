@@ -6,6 +6,25 @@
     #include "tap_dance.h"
 #endif
 
+//Custom keys
+#define KC_GAME     MO(_GM)
+#define KC_FN       MO(_FN)
+
+//Layers
+enum userspace_layers {
+  _EK,      //Base EurKey keymap
+  _AZ,      //Base AZERTY keymap
+  _EK_S,     //EurKey + Shift
+  _EK_A,     //EurKey + Alt Gr
+  _EK_SA,    //EurKey + Shift & Alt Gr
+  _AZ_S,     //AZERTY + Shift
+  _AZ_A,     //AZERTY + Alt Gr
+  _AZ_SA,    //AZERTY + Shift & Alt Gr
+  _GM,      //Gaming layer (basic AZERTY without shortcuts)
+  _FN,      //Function layer
+  _SYS      //System layer
+};
+
 //Activation of tap dances if the feature is enabled
 #ifdef TAP_DANCE_ENABLE
 #    define KC_SPC_ENT TD(TD_SPC_ENT)
