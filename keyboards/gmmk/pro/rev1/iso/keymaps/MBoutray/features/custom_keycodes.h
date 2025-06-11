@@ -128,6 +128,9 @@ enum tap_dances {
 #define MO_NAV MO(_NAV)
 #define MO_SYM MO(_SYM)
 
+/* Layer-tap shortcuts */
+#define LT_NAV LT(_NAV, KC_CAPS)
+
 /* Layer toggle shortcuts */
 #define TG_GAME TG(_GAME)
 #define TG_NUM TG(_NUM)
