@@ -42,7 +42,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 /* Leader key sequences */
 LEADER_EXTERNS();
 
-void matrix_scan_user(void) {
+void leader_matrix_scan_user(void) {
     LEADER_DICTIONARY() {
         leading = false;
         leader_end();

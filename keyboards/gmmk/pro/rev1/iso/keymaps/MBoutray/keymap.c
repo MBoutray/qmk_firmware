@@ -377,6 +377,9 @@ const key_override_t **key_overrides = NULL;
 
 /* Matrix scan for layout-specific key mapping */
 void matrix_scan_user(void) {
+    // Leader key handling
+    leader_matrix_scan_user();
+
     // This would be where we'd implement dynamic key remapping
     // based on current_layout if needed
 }
