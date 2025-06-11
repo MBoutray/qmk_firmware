@@ -113,7 +113,8 @@ enum tap_dances {
     TD_SPC_PAREN,           // Space / Parentheses
     TD_SHIFT_CAPS,          // Shift / Caps Lock
     TD_ESC_TILDE,           // Esc / Tilde
-    TD_QUOT_DQUOT          // Quote / Double Quote
+    TD_QUOT_DQUOT,          // Quote / Double Quote
+    TD_RGUI_SYM,            // Right GUI / Symbols layer
 };
 
 /* Helper macros for cleaner keymap */
@@ -130,6 +131,9 @@ enum tap_dances {
 
 /* Layer-tap shortcuts */
 #define LT_NAV LT(_NAV, KC_CAPS)
+
+/* Tap dance */
+#define TD_RGUI TD(TD_RGUI_SYM)
 
 /* Layer toggle shortcuts */
 #define TG_GAME TG(_GAME)

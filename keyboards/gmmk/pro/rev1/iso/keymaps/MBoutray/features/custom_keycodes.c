@@ -31,12 +31,28 @@ void dance_shift_caps_reset(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
+void dance_rgui_sym_finished(qk_tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        // Single tap: Right GUI
+        tap_code16(KC_RGUI);
+    } else if (state->count == 2) {
+        // Double tap: Symbols layer
+        layer_on(_SYM);
+        sym_one_shot = true;  // Enable one-shot for symbols
+    }
+}
+
+void dance_rgui_sym_reset(qk_tap_dance_state_t *state, void *user_data) {
+
+}
+
 // Tap Dance definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_SPC_PAREN] = ACTION_TAP_DANCE_FN(dance_space_paren_finished),
     [TD_SHIFT_CAPS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_shift_caps_finished, dance_shift_caps_reset),
     [TD_ESC_TILDE] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_TILD),
     [TD_QUOT_DQUOT] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_DQUO),
+    [TD_RGUI_SYM] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_rgui_sym_finished, dance_rgui_sym_reset),
 };
 
 /* Leader key sequences */
