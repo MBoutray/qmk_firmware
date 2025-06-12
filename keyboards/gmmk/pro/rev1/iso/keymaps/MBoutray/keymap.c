@@ -175,56 +175,56 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         /* French accents - lowercase */
         case FR_E_ACUTE:
             if (record->event.pressed) {
-                send_unicode_string("é");
+                type_unicode_string("é");
             }
             return false;
             
         case FR_E_GRAVE:
             if (record->event.pressed) {
-                send_unicode_string("è");
+                type_unicode_string("è");
             }
             return false;
             
         case FR_A_GRAVE:
             if (record->event.pressed) {
-                send_unicode_string("à");
+                type_unicode_string("à");
             }
             return false;
             
         case FR_U_GRAVE:
             if (record->event.pressed) {
-                send_unicode_string("ù");
+                type_unicode_string("ù");
             }
             return false;
             
         case FR_C_CEDILLA:
             if (record->event.pressed) {
-                send_unicode_string("ç");
+                type_unicode_string("ç");
             }
             return false;
             
         /* French accents - uppercase (with shift) */
         case FR_E_ACUTE_MAJ:
             if (record->event.pressed) {
-                send_unicode_string("É");
+                type_unicode_string("É");
             }
             return false;
             
         case FR_E_GRAVE_MAJ:
             if (record->event.pressed) {
-                send_unicode_string("È");
+                type_unicode_string("È");
             }
             return false;
             
         case FR_A_GRAVE_MAJ:
             if (record->event.pressed) {
-                send_unicode_string("À");
+                type_unicode_string("À");
             }
             return false;
             
         case FR_C_CEDILLA_MAJ:
             if (record->event.pressed) {
-                send_unicode_string("Ç");
+                type_unicode_string("Ç");
             }
             return false;
             

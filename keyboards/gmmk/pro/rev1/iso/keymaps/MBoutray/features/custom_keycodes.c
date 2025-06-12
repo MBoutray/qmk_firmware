@@ -95,11 +95,11 @@ void leader_matrix_scan_user(void) {
         
         // French phrases
         SEQ_THREE_KEYS(KC_B, KC_J, KC_R) {
-            send_unicode_string("Bonjour");
+            type_unicode_string("Bonjour");
         }
         
         SEQ_THREE_KEYS(KC_M, KC_R, KC_C) {
-            send_unicode_string("Merci");
+            type_unicode_string("Merci");
         }
     }
 }
@@ -143,7 +143,7 @@ const key_override_t *key_overrides[] = {
 };
 
 /* Helper function for sending Unicode strings */
-void send_unicode_string(const char *str) {
+void type_unicode_string(const char *str) {
     while (*str) {
         uint16_t keycode = 0;
         
