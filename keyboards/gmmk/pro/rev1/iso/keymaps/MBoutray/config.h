@@ -12,8 +12,8 @@
 #define VENDOR_ID       0x320F
 #define PRODUCT_ID      0x5044
 #define DEVICE_VER      0x0001
-#define MANUFACTURER    Glorious
-#define PRODUCT         GMMK Pro ISO Multi-Layout
+#define MANUFACTURER    "Glorious"
+#define PRODUCT         "GMMK Pro ISO Multi-Layout"
 
 /* Key Matrix Configuration */
 #define MATRIX_ROWS 11
