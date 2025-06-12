@@ -8,6 +8,9 @@
 
 #pragma once
 
+#undef MANUFACTURER
+#undef PRODUCT
+
 /* USB Device Configuration */
 #define VENDOR_ID       0x320F
 #define PRODUCT_ID      0x5044
