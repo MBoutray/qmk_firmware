@@ -142,69 +142,56 @@ const key_override_t *key_overrides[] = {
     NULL
 };
 
-/* Helper function for sending Unicode strings */
+// ASCII-to-keycode lookup for common chars
+static const uint16_t ascii_map[128] = {
+    [' '] = KC_SPC,      ['.'] = KC_DOT,      [','] = KC_COMM,
+    ['!'] = S(KC_1),     ['?'] = S(KC_SLSH),  ['@'] = S(KC_2),
+    ['#'] = S(KC_3),     ['$'] = S(KC_4),     ['%'] = S(KC_5),
+    ['^'] = S(KC_6),     ['&'] = S(KC_7),     ['*'] = S(KC_8),
+    ['('] = S(KC_9),     [')'] = S(KC_0),     ['-'] = KC_MINS,
+    ['_'] = S(KC_MINS),  ['='] = KC_EQL,      ['+'] = S(KC_EQL),
+    ['['] = KC_LBRC,     [']'] = KC_RBRC,     ['{'] = S(KC_LBRC),
+    ['}'] = S(KC_RBRC),  [';'] = KC_SCLN,     [':'] = S(KC_SCLN),
+    ['\''] = KC_QUOT,    ['"'] = S(KC_QUOT),  ['/'] = KC_SLSH,
+    ['\\'] = KC_BSLS,    ['<'] = S(KC_COMM),  ['>'] = S(KC_DOT)
+};
+
+// Unicode hex codes for French accents (indexed by unsigned char)
+static const char *unicode_map[256] = {
+    [0xE9] = "00E9",  // é
+    [0xE8] = "00E8",  // è
+    [0xE0] = "00E0",  // à
+    [0xF9] = "00F9",  // ù
+    [0xE7] = "00E7",  // ç
+    [0xC9] = "00C9",  // É
+    [0xC8] = "00C8",  // È
+    [0xC0] = "00C0",  // À
+    [0xC7] = "00C7"   // Ç
+};
+
 void type_unicode_string(const char *str) {
     while (*str) {
-        uint16_t keycode = 0;
-        
-        // Map characters to keycodes (simplified for common chars)
-        if (*str >= 'a' && *str <= 'z') {
-            keycode = KC_A + (*str - 'a');
-        } else if (*str >= 'A' && *str <= 'Z') {
-            keycode = S(KC_A + (*str - 'A'));
-        } else if (*str >= '0' && *str <= '9') {
-            keycode = KC_0 + (*str - '0');
-        } else {
-            // Special characters
-            switch (*str) {
-                case ' ': keycode = KC_SPC; break;
-                case '.': keycode = KC_DOT; break;
-                case ',': keycode = KC_COMM; break;
-                case '!': keycode = S(KC_1); break;
-                case '?': keycode = S(KC_SLSH); break;
-                case '@': keycode = S(KC_2); break;
-                case '#': keycode = S(KC_3); break;
-                case '$': keycode = S(KC_4); break;
-                case '%': keycode = S(KC_5); break;
-                case '^': keycode = S(KC_6); break;
-                case '&': keycode = S(KC_7); break;
-                case '*': keycode = S(KC_8); break;
-                case '(': keycode = S(KC_9); break;
-                case ')': keycode = S(KC_0); break;
-                case '-': keycode = KC_MINS; break;
-                case '_': keycode = S(KC_MINS); break;
-                case '=': keycode = KC_EQL; break;
-                case '+': keycode = S(KC_EQL); break;
-                case '[': keycode = KC_LBRC; break;
-                case ']': keycode = KC_RBRC; break;
-                case '{': keycode = S(KC_LBRC); break;
-                case '}': keycode = S(KC_RBRC); break;
-                case ';': keycode = KC_SCLN; break;
-                case ':': keycode = S(KC_SCLN); break;
-                case '\'': keycode = KC_QUOT; break;
-                case '"': keycode = S(KC_QUOT); break;
-                case '/': keycode = KC_SLSH; break;
-                case '\\': keycode = KC_BSLS; break;
-                case '<': keycode = S(KC_COMM); break;
-                case '>': keycode = S(KC_DOT); break;
-                
-                // French special characters (requires Unicode input method)
-                case 'é': send_string(SS_LALT("0233")); str++; continue;
-                case 'è': send_string(SS_LALT("0232")); str++; continue;
-                case 'à': send_string(SS_LALT("0224")); str++; continue;
-                case 'ù': send_string(SS_LALT("0249")); str++; continue;
-                case 'ç': send_string(SS_LALT("0231")); str++; continue;
-                case 'É': send_string(SS_LALT("0201")); str++; continue;
-                case 'È': send_string(SS_LALT("0200")); str++; continue;
-                case 'À': send_string(SS_LALT("0192")); str++; continue;
-                case 'Ç': send_string(SS_LALT("0199")); str++; continue;
-            }
+        unsigned char c = (unsigned char)*str;
+
+        // Letters
+        if (c >= 'a' && c <= 'z') {
+            tap_code(KC_A + (c - 'a'));
+        } else if (c >= 'A' && c <= 'Z') {
+            tap_code(S(KC_A + (c - 'A')));
         }
-        
-        if (keycode) {
-            tap_code16(keycode);
+        // Digits
+        else if (c >= '0' && c <= '9') {
+            tap_code(KC_0 + (c - '0'));
         }
-        
+        // Common ASCII symbols
+        else if (c < 128 && ascii_map[c]) {
+            tap_code(ascii_map[c]);
+        }
+        // Accented letters via Unicode
+        else if (unicode_map[c]) {
+            send_unicode_string(unicode_map[c]);
+        }
+
         str++;
     }
 }

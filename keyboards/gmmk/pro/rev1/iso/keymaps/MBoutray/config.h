@@ -129,3 +129,6 @@
 #define FRENCH_ACCENTS_ENABLE
 #define LAYOUT_SWITCHER_ENABLE
 #define SMART_BRACKETS_ENABLE
+
+/* Unicode input configuration */
+#define UNICODE_SELECTED_MODES UC_LNX, UC_WINC
