@@ -7,7 +7,7 @@
 
 /* Tap Dance implementations */
 // Define tap dance actions
-void dance_space_paren_finished(qk_tap_dance_state_t *state, void *user_data) {
+void dance_space_paren_finished(tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
         tap_code(KC_SPC);
     } else if (state->count == 2) {
@@ -17,7 +17,7 @@ void dance_space_paren_finished(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void dance_shift_caps_finished(qk_tap_dance_state_t *state, void *user_data) {
+void dance_shift_caps_finished(tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
         register_code(KC_LSFT);
     } else if (state->count == 2) {
@@ -25,13 +25,13 @@ void dance_shift_caps_finished(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void dance_shift_caps_reset(qk_tap_dance_state_t *state, void *user_data) {
+void dance_shift_caps_reset(tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
         unregister_code(KC_LSFT);
     }
 }
 
-void dance_rgui_sym_finished(qk_tap_dance_state_t *state, void *user_data) {
+void dance_rgui_sym_finished(tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
         // Single tap: Right GUI
         tap_code16(KC_RGUI);
@@ -42,12 +42,12 @@ void dance_rgui_sym_finished(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void dance_rgui_sym_reset(qk_tap_dance_state_t *state, void *user_data) {
+void dance_rgui_sym_reset(tap_dance_state_t *state, void *user_data) {
 
 }
 
 // Tap Dance definitions
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
     [TD_SPC_PAREN] = ACTION_TAP_DANCE_FN(dance_space_paren_finished),
     [TD_SHIFT_CAPS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_shift_caps_finished, dance_shift_caps_reset),
     [TD_ESC_TILDE] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_TILD),
