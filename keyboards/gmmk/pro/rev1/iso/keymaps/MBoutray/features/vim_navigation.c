@@ -17,7 +17,7 @@ bool process_vim_navigation(uint16_t keycode, keyrecord_t *record) {
     bool shift_held = mods & MOD_MASK_SHIFT;
     bool ctrl_held = mods & MOD_MASK_CTRL;
     bool alt_held = mods & MOD_MASK_ALT;
-    bool gui_held = mods & MOD_MASK_GUI;
+    // bool gui_held = mods & MOD_MASK_GUI;
     
     switch (keycode) {
         /* Basic movement */
