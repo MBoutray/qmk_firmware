@@ -1,12 +1,29 @@
 /* Copyright 2024 MBoutray
  * Custom keycode implementations for advanced features
  */
-
+#include QMK_KEYBOARD_H
 #include "custom_keycodes.h"
 #include "quantum.h"
 
+extern bool sym_one_shot;
+
+/* Forward declarations */
+void dance_space_paren_finished(tap_dance_state_t *state, void *user_data);
+void dance_shift_caps_finished(tap_dance_state_t *state, void *user_data);
+void dance_shift_caps_reset(tap_dance_state_t *state, void *user_data);
+void dance_rgui_sym_finished(tap_dance_state_t *state, void *user_data);
+void dance_rgui_sym_reset(tap_dance_state_t *state, void *user_data);
+
+/* Actions definitions */
+tap_dance_action_t tap_dance_actions[] = {
+    [TD_SPC_PAREN] = ACTION_TAP_DANCE_FN(dance_space_paren_finished),
+    [TD_SHIFT_CAPS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_shift_caps_finished, dance_shift_caps_reset),
+    [TD_ESC_TILDE] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_TILD),
+    [TD_QUOT_DQUOT] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_DQUO),
+    [TD_RGUI_SYM] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_rgui_sym_finished, dance_rgui_sym_reset),
+};
+
 /* Tap Dance implementations */
-// Define tap dance actions
 void dance_space_paren_finished(tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
         tap_code(KC_SPC);
@@ -45,15 +62,6 @@ void dance_rgui_sym_finished(tap_dance_state_t *state, void *user_data) {
 void dance_rgui_sym_reset(tap_dance_state_t *state, void *user_data) {
 
 }
-
-// Tap Dance definitions
-tap_dance_action_t tap_dance_actions[] = {
-    [TD_SPC_PAREN] = ACTION_TAP_DANCE_FN(dance_space_paren_finished),
-    [TD_SHIFT_CAPS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_shift_caps_finished, dance_shift_caps_reset),
-    [TD_ESC_TILDE] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_TILD),
-    [TD_QUOT_DQUOT] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_DQUO),
-    [TD_RGUI_SYM] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_rgui_sym_finished, dance_rgui_sym_reset),
-};
 
 /* Leader key sequences */
 LEADER_EXTERNS();
