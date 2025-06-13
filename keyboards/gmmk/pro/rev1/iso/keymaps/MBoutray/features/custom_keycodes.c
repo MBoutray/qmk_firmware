@@ -51,7 +51,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 }
 
 // ASCII-to-keycode lookup for common chars
-static const uint16_t ascii_map[128] = {
+const uint16_t ascii_map[128] = {
     [' '] = KC_SPC,      ['.'] = KC_DOT,      [','] = KC_COMM,
     ['!'] = S(KC_1),     ['?'] = S(KC_SLSH),  ['@'] = S(KC_2),
     ['#'] = S(KC_3),     ['$'] = S(KC_4),     ['%'] = S(KC_5),
@@ -65,21 +65,21 @@ static const uint16_t ascii_map[128] = {
 };
 
 // Unicode hex codes for French accents (indexed by unsigned char)
-static const char *unicode_map[256] = {
-    [0xE9] = "00E9",  // é
-    [0xE8] = "00E8",  // è
-    [0xE0] = "00E0",  // à
-    [0xF9] = "00F9",  // ù
-    [0xE7] = "00E7",  // ç
-    [0xC9] = "00C9",  // É
-    [0xC8] = "00C8",  // È
-    [0xC0] = "00C0",  // À
-    [0xC7] = "00C7"   // Ç
+const uint32_t PROGMEM unicode_map[] = {
+    [FR_E_ACUTE]       = 0x00E9,  // é
+    [FR_E_GRAVE]       = 0x00E8,  // è
+    [FR_A_GRAVE]       = 0x00E0,  // à
+    [FR_U_GRAVE]       = 0x00F9,  // ù
+    [FR_C_CEDILLA]     = 0x00E7,  // ç
+    [FR_E_ACUTE_MAJ]   = 0x00C9,  // É
+    [FR_E_GRAVE_MAJ]   = 0x00C8,  // È
+    [FR_A_GRAVE_MAJ]   = 0x00C0,  // À
+    [FR_C_CEDILLA_MAJ] = 0x00C7   // Ç
 };
 
 void type_unicode_string(const char *str) {
     while (*str) {
-        unsigned char c = (unsigned char)*str;
+        uint8_t c = (uint8_t)*str;
 
         // Letters
         if (c >= 'a' && c <= 'z') {
@@ -96,8 +96,11 @@ void type_unicode_string(const char *str) {
             tap_code(ascii_map[c]);
         }
         // Accented letters via Unicode
-        else if (unicode_map[c]) {
-            send_unicode_string(unicode_map[c]);
+        else {
+            uint32_t code = pgm_read_dword(&unicode_map[c]);
+            if (code) {
+                register_code(code);
+            }
         }
 
         str++;
