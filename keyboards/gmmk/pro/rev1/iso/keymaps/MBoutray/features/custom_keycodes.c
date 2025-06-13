@@ -63,59 +63,6 @@ void dance_rgui_sym_reset(tap_dance_state_t *state, void *user_data) {
 
 }
 
-// /* Leader key sequences */
-// #ifdef LEADER_ENABLE
-// LEADER_EXTERNS();
-// #endif
-
-// #ifdef LEADER_ENABLE
-// void leader_matrix_scan_user(void) {
-//     LEADER_DICTIONARY() {
-//         leading = false;
-//         leader_end();
-        
-//         // Email addresses
-//         SEQ_TWO_KEYS(KC_E, KC_M) {
-//             SEND_STRING("your.email@example.com");
-//         }
-        
-//         // Common code snippets
-//         SEQ_TWO_KEYS(KC_F, KC_N) {
-//             SEND_STRING("function ");
-//         }
-        
-//         SEQ_THREE_KEYS(KC_C, KC_O, KC_N) {
-//             SEND_STRING("console.log();");
-//             tap_code(KC_LEFT);
-//             tap_code(KC_LEFT);
-//         }
-        
-//         // Git commands
-//         SEQ_TWO_KEYS(KC_G, KC_S) {
-//             SEND_STRING("git status");
-//         }
-        
-//         SEQ_TWO_KEYS(KC_G, KC_P) {
-//             SEND_STRING("git push");
-//         }
-        
-//         SEQ_TWO_KEYS(KC_G, KC_C) {
-//             SEND_STRING("git commit -m \"\"");
-//             tap_code(KC_LEFT);
-//         }
-        
-//         // French phrases
-//         SEQ_THREE_KEYS(KC_B, KC_J, KC_R) {
-//             type_unicode_string("Bonjour");
-//         }
-        
-//         SEQ_THREE_KEYS(KC_M, KC_R, KC_C) {
-//             type_unicode_string("Merci");
-//         }
-//     }
-// }
-// #endif
-
 /* Auto Shift configuration */
 bool get_auto_shift_state(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {

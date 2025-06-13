@@ -12,7 +12,7 @@ enum custom_keycodes {
     LAY_AZE = SAFE_RANGE,   // Switch to AZERTY
     LAY_QWE,                // Switch to QWERTY  
     LAY_BPO,                // Switch to BÉPO
-    
+
     // Vim-style navigation
     VIM_H,                  // Left (with modifiers)
     VIM_J,                  // Down (with modifiers)
@@ -25,7 +25,7 @@ enum custom_keycodes {
     VIM_DLR,                // End of line
     VIM_GG,                 // Beginning of document
     VIM_G,                  // End of document
-    
+
     // French accents (lowercase)
     FR_E_ACUTE,             // é
     FR_E_GRAVE,             // è
@@ -42,13 +42,13 @@ enum custom_keycodes {
     FR_U_TREMA,             // ü
     FR_OE,                  // œ
     FR_AE,                  // æ
-    
+
     // French accents (uppercase)
     FR_E_ACUTE_MAJ,         // É
     FR_E_GRAVE_MAJ,         // È
     FR_A_GRAVE_MAJ,         // À
     FR_C_CEDILLA_MAJ,       // Ç
-    
+
     // Smart brackets
     SMART_PAREN,            // ()
     SMART_BRACKET,          // []
@@ -56,7 +56,7 @@ enum custom_keycodes {
     SMART_ANGLE,            // <>
     SMART_QUOTE,            // ""
     SMART_SQUOTE,           // ''
-    
+
     // RGB custom modes
     RGB_REAC_WIDE,
     RGB_REAC_MWIDE,
@@ -64,26 +64,26 @@ enum custom_keycodes {
     RGB_MULT_SPL,
     RGB_SOL_SPL,
     RGB_SOL_MULT_SPL,
-    
+
     // System functions
     SYS_SLEEP,              // System sleep
     SYS_WAKE,               // System wake
     EEPROM_RESET,           // Reset EEPROM
-    
+
     // Macro recording
     DYN_REC_START1,         // Start recording macro 1
     DYN_REC_START2,         // Start recording macro 2
     DYN_REC_STOP,           // Stop recording
     DYN_MACRO_PLAY1,        // Play macro 1
     DYN_MACRO_PLAY2,        // Play macro 2
-    
+
     // Special functions
     ALT_TAB,                // Alt-Tab functionality
     CMD_TAB,                // Cmd-Tab for macOS
     CLIPBOARD_COPY,         // Cross-platform copy
     CLIPBOARD_PASTE,        // Cross-platform paste
     CLIPBOARD_CUT,          // Cross-platform cut
-    
+
     // Custom safe range for user
     NEW_SAFE_RANGE
 };

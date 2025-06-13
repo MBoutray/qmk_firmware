@@ -49,7 +49,7 @@
     #define RGB_MATRIX_SAT_STEP 8
     #define RGB_MATRIX_VAL_STEP 8
     #define RGB_MATRIX_SPD_STEP 10
-    
+
     /* Enable specific RGB effects */
     #define ENABLE_RGB_MATRIX_BREATHING
     #define ENABLE_RGB_MATRIX_CYCLE_ALL
@@ -59,7 +59,7 @@
     #define ENABLE_RGB_MATRIX_MULTISPLASH
     #define ENABLE_RGB_MATRIX_SOLID_SPLASH
     #define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
-    
+
     /* Disable unused RGB effects to save space */
     #define DISABLE_RGB_MATRIX_ALPHAS_MODS
     #define DISABLE_RGB_MATRIX_GRADIENT_UP_DOWN
@@ -97,10 +97,6 @@
 
 /* Tap Dance Configuration */
 #define TAPPING_TERM 200
-
-/* Leader Key Configuration */
-#define LEADER_TIMEOUT 300
-#define LEADER_PER_KEY_TIMING
 
 /* Dynamic Macro Configuration */
 #define DYNAMIC_MACRO_SIZE 128

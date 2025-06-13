@@ -128,7 +128,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_vim_navigation(keycode, record)) {
         return false;
     }
-    
+
     // Alt-Tab handling
     if (is_alt_tab_active) {
         if (timer_elapsed(alt_tab_timer) > 1000) {
@@ -136,7 +136,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             is_alt_tab_active = false;
         }
     }
-    
+
     switch (keycode) {
         /* Layout switching */
         case LAY_AZE:
@@ -149,7 +149,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 #endif
             }
             return false;
-            
+
         case LAY_QWE:
             if (record->event.pressed) {
                 current_layout = LAYOUT_QWERTY;
@@ -160,7 +160,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 #endif
             }
             return false;
-            
+
         case LAY_BPO:
             if (record->event.pressed) {
                 current_layout = LAYOUT_BEPO;
@@ -171,63 +171,63 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 #endif
             }
             return false;
-            
+
         /* French accents - lowercase */
         case FR_E_ACUTE:
             if (record->event.pressed) {
                 type_unicode_string("é");
             }
             return false;
-            
+
         case FR_E_GRAVE:
             if (record->event.pressed) {
                 type_unicode_string("è");
             }
             return false;
-            
+
         case FR_A_GRAVE:
             if (record->event.pressed) {
                 type_unicode_string("à");
             }
             return false;
-            
+
         case FR_U_GRAVE:
             if (record->event.pressed) {
                 type_unicode_string("ù");
             }
             return false;
-            
+
         case FR_C_CEDILLA:
             if (record->event.pressed) {
                 type_unicode_string("ç");
             }
             return false;
-            
+
         /* French accents - uppercase (with shift) */
         case FR_E_ACUTE_MAJ:
             if (record->event.pressed) {
                 type_unicode_string("É");
             }
             return false;
-            
+
         case FR_E_GRAVE_MAJ:
             if (record->event.pressed) {
                 type_unicode_string("È");
             }
             return false;
-            
+
         case FR_A_GRAVE_MAJ:
             if (record->event.pressed) {
                 type_unicode_string("À");
             }
             return false;
-            
+
         case FR_C_CEDILLA_MAJ:
             if (record->event.pressed) {
                 type_unicode_string("Ç");
             }
             return false;
-            
+
         /* Smart brackets */
         case SMART_PAREN:
             if (record->event.pressed) {
@@ -236,7 +236,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code(KC_LEFT);
             }
             return false;
-            
+
         case SMART_BRACKET:
             if (record->event.pressed) {
                 tap_code16(KC_LBRC);
@@ -244,7 +244,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code(KC_LEFT);
             }
             return false;
-            
+
         case SMART_BRACE:
             if (record->event.pressed) {
                 tap_code16(KC_LCBR);
@@ -252,7 +252,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code(KC_LEFT);
             }
             return false;
-            
+
         case SMART_ANGLE:
             if (record->event.pressed) {
                 tap_code16(KC_LT);
@@ -260,7 +260,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code(KC_LEFT);
             }
             return false;
-            
+
         case SMART_QUOTE:
             if (record->event.pressed) {
                 tap_code16(KC_DQUO);
@@ -268,44 +268,44 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code(KC_LEFT);
             }
             return false;
-            
+
         /* RGB custom modes */
         case RGB_REAC_WIDE:
             if (record->event.pressed) {
                 rgb_matrix_mode(RGB_MATRIX_SOLID_REACTIVE_WIDE);
             }
             return false;
-            
+
         case RGB_REAC_MWIDE:
             if (record->event.pressed) {
                 rgb_matrix_mode(RGB_MATRIX_SOLID_REACTIVE_MULTIWIDE);
             }
             return false;
-            
+
         case RGB_SPL:
             if (record->event.pressed) {
                 rgb_matrix_mode(RGB_MATRIX_SPLASH);
             }
             return false;
-            
+
         case RGB_MULT_SPL:
             if (record->event.pressed) {
                 rgb_matrix_mode(RGB_MATRIX_MULTISPLASH);
             }
             return false;
-            
+
         case RGB_SOL_SPL:
             if (record->event.pressed) {
                 rgb_matrix_mode(RGB_MATRIX_SOLID_SPLASH);
             }
             return false;
-            
+
         case RGB_SOL_MULT_SPL:
             if (record->event.pressed) {
                 rgb_matrix_mode(RGB_MATRIX_SOLID_MULTISPLASH);
             }
             return false;
-            
+
         /* Alt-Tab functionality */
         case ALT_TAB:
             if (record->event.pressed) {
@@ -317,20 +317,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code16(KC_TAB);
             }
             return false;
-            
+
         /* Cross-platform clipboard */
         case CLIPBOARD_COPY:
             if (record->event.pressed) {
                 tap_code16(LCTL(KC_C));
             }
             return false;
-            
+
         case CLIPBOARD_PASTE:
             if (record->event.pressed) {
                 tap_code16(LCTL(KC_V));
             }
             return false;
-            
+
         case CLIPBOARD_CUT:
             if (record->event.pressed) {
                 tap_code16(LCTL(KC_X));
@@ -340,7 +340,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         /* Tad dance */
         case TD(TD_RGUI_SYM):
             break;  // Handled in tap dance function
-        
+
         default:
             // Reset one-shot symbol layer if necessary
             if(sym_one_shot && record->event.pressed && keycode != TD(TD_RGUI_SYM)) {
@@ -348,7 +348,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 sym_one_shot = false;
             }
     }
-    
+
     return true;
 }
 
@@ -391,9 +391,6 @@ const key_override_t **key_overrides = NULL;
 
 /* Matrix scan for layout-specific key mapping */
 void matrix_scan_user(void) {
-    // Leader key handling
-    leader_matrix_scan_user();
-
     // This would be where we'd implement dynamic key remapping
     // based on current_layout if needed
 }

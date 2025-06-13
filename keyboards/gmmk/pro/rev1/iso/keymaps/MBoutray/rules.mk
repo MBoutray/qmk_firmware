@@ -22,7 +22,7 @@ ENCODER_ENABLE = yes          # Enable rotary encoder
 
 # Feature Options
 TAP_DANCE_ENABLE = yes        # Enable tap dance functionality
-LEADER_ENABLE = yes           # Enable leader key functionality
+LEADER_ENABLE = no            # Enable leader key functionality
 AUTO_SHIFT_ENABLE = yes       # Enable auto shift
 DYNAMIC_MACRO_ENABLE = yes    # Enable dynamic macros
 UNICODE_ENABLE = yes          # Enable unicode support
