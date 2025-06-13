@@ -147,7 +147,3 @@ enum tap_dances {
 /* Layer toggle shortcuts */
 #define TG_GAME TG(_GAME)
 #define TG_NUM TG(_NUM)
-
-/* Transparent key */
-#define _______ KC_TRNS
-#define XXXXXXX KC_NO
