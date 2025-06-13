@@ -4,6 +4,8 @@
  */
 
 #include QMK_KEYBOARD_H
+#include "keymap_french.h"
+#include "sendstring_french.h"
 #include "eeconfig.h"
 #include "leader.h"
 #include "unicode.h"
@@ -296,6 +298,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
 
         case SMART_QUOTE:
+            if (record->event.pressed) {
+                tap_code16(KC_DQUO);
+                tap_code16(KC_DQUO);
+                tap_code(KC_LEFT);
+            }
+            return false;
+
+        case SMART_SQUOTE:
             if (record->event.pressed) {
                 tap_code16(KC_DQUO);
                 tap_code16(KC_DQUO);
