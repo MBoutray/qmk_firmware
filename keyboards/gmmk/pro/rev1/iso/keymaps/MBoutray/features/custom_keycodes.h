@@ -10,6 +10,15 @@
 void dance_rgui_sym_finished(tap_dance_state_t *state, void *user_data);
 void dance_rgui_sym_reset(tap_dance_state_t *state, void *user_data);
 
+/* Auto shift */
+bool get_auto_shift_state(uint16_t keycode, keyrecord_t *record);
+
+/* Per-key tapping term */
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record);
+
+/* Unicode handling */
+void type_unicode_string(const char *str);
+
 /* Custom Keycodes */
 enum custom_keycodes {
     // Layout switching
