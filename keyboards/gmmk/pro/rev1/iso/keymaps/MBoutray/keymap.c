@@ -386,9 +386,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     return false;
 }
 
-/* Dynamic key overrides based on layout */
-const key_override_t **key_overrides = NULL;
-
 /* Matrix scan for layout-specific key mapping */
 void matrix_scan_user(void) {
     // This would be where we'd implement dynamic key remapping

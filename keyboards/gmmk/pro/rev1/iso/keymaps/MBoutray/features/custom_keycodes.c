@@ -50,17 +50,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-/* Key override definitions */
-const key_override_t delete_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, KC_DEL);
-const key_override_t grave_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_ESC, KC_GRV);
-
-// Array of key overrides
-const key_override_t *key_overrides[] = {
-    &delete_key_override,
-    &grave_key_override,
-    NULL
-};
-
 // ASCII-to-keycode lookup for common chars
 static const uint16_t ascii_map[128] = {
     [' '] = KC_SPC,      ['.'] = KC_DOT,      [','] = KC_COMM,

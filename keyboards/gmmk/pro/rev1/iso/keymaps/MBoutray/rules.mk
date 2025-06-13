@@ -26,7 +26,7 @@ LEADER_ENABLE = no            # Enable leader key functionality
 AUTO_SHIFT_ENABLE = yes       # Enable auto shift
 DYNAMIC_MACRO_ENABLE = yes    # Enable dynamic macros
 UNICODE_ENABLE = yes          # Enable unicode support
-KEY_OVERRIDE_ENABLE = yes     # Enable key overrides
+KEY_OVERRIDE_ENABLE = no     # Enable key overrides
 COMBO_ENABLE = no             # Disable combos to save space
 
 # Size optimization
