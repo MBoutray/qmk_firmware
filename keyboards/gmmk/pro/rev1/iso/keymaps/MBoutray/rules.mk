@@ -21,6 +21,7 @@ AUDIO_ENABLE = no             # Audio output
 ENCODER_ENABLE = yes          # Enable rotary encoder
 
 # Feature Options
+USER_CONFIG_ENABLE = yes
 TAP_DANCE_ENABLE = yes        # Enable tap dance functionality
 LEADER_ENABLE = no            # Enable leader key functionality
 AUTO_SHIFT_ENABLE = yes       # Enable auto shift

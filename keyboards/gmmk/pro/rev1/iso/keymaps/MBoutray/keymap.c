@@ -34,9 +34,9 @@ user_config_t user_config;
 /* Initialize keyboard */
 void keyboard_post_init_user(void) {
     // Load saved layout from EEPROM
-    user_config.raw = eeconfig_read_user();
+    user_config.raw = eeconfig_read_kb();
     current_layout = user_config.layout;
-    
+
     // Set initial RGB mode based on layout
     #ifdef RGB_MATRIX_ENABLE
     switch (current_layout) {
@@ -143,7 +143,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 current_layout = LAYOUT_AZERTY;
                 user_config.layout = current_layout;
-                eeconfig_update_user(user_config.raw);
+                eeconfig_update_kb(user_config.raw);
                 #ifdef RGB_MATRIX_ENABLE
                 rgb_matrix_sethsv_noeeprom(0, 255, 255);    // Red for AZERTY
                 #endif
@@ -154,7 +154,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 current_layout = LAYOUT_QWERTY;
                 user_config.layout = current_layout;
-                eeconfig_update_user(user_config.raw);
+                eeconfig_update_kb(user_config.raw);
                 #ifdef RGB_MATRIX_ENABLE
                 rgb_matrix_sethsv_noeeprom(120, 255, 255);  // Green for QWERTY
                 #endif
@@ -165,7 +165,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 current_layout = LAYOUT_BEPO;
                 user_config.layout = current_layout;
-                eeconfig_update_user(user_config.raw);
+                eeconfig_update_kb(user_config.raw);
                 #ifdef RGB_MATRIX_ENABLE
                 rgb_matrix_sethsv_noeeprom(240, 255, 255);  // Blue for BÉPO
                 #endif
