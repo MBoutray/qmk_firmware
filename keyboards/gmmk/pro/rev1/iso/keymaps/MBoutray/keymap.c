@@ -395,6 +395,11 @@ void matrix_scan_user(void) {
     // based on current_layout if needed
 }
 
+/* Actions definitions */
+tap_dance_action_t tap_dance_actions[] = {
+    [TD_RGUI_SYM] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_rgui_sym_finished, dance_rgui_sym_reset),
+};
+
 /* Layer state handling */
 layer_state_t layer_state_set_user(layer_state_t state) {
     // Visual feedback for active layers

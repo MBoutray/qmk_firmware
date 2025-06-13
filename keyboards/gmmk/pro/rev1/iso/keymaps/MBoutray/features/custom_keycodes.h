@@ -6,11 +6,15 @@
 
 #include "quantum.h"
 
+/* Tap dance actions */
+void dance_rgui_sym_finished(tap_dance_state_t *state, void *user_data);
+void dance_rgui_sym_reset(tap_dance_state_t *state, void *user_data);
+
 /* Custom Keycodes */
 enum custom_keycodes {
     // Layout switching
     LAY_AZE = SAFE_RANGE,   // Switch to AZERTY
-    LAY_QWE,                // Switch to QWERTY  
+    LAY_QWE,                // Switch to QWERTY
     LAY_BPO,                // Switch to BÉPO
 
     // Vim-style navigation
@@ -110,11 +114,7 @@ enum layout_types {
 
 /* Tap Dance declarations */
 enum tap_dances {
-    TD_SPC_PAREN,           // Space / Parentheses
-    TD_SHIFT_CAPS,          // Shift / Caps Lock
-    TD_ESC_TILDE,           // Esc / Tilde
-    TD_QUOT_DQUOT,          // Quote / Double Quote
-    TD_RGUI_SYM,            // Right GUI / Symbols layer
+    TD_RGUI_SYM = 0,            // Right GUI / Symbols layer
 };
 
 /* Helper macros for cleaner keymap */
