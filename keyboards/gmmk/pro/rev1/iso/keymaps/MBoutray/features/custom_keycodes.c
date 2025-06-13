@@ -99,7 +99,7 @@ void type_unicode_string(const char *str) {
         else {
             uint32_t code = pgm_read_dword(&unicode_map[c]);
             if (code) {
-                register_code(code);
+                register_unicode(code);
             }
         }
 
