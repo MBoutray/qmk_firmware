@@ -4,6 +4,9 @@
  */
 
 #include QMK_KEYBOARD_H
+#include "eeconfig.h"
+#include "leader.h"
+#include "unicode.h"
 #include "features/custom_keycodes.h"
 #include "features/vim_navigation.h"
 
