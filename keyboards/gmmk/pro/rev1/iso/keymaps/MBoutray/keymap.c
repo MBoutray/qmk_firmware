@@ -18,7 +18,7 @@ static bool is_alt_tab_active = false;
 static uint16_t alt_tab_timer;
 
 /* Tap dance state */
-static bool sym_one_shot = false;
+bool sym_one_shot = false;
 
 /* EEPROM layout storage */
 typedef union {
