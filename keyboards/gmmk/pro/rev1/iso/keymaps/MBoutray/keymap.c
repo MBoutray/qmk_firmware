@@ -4,7 +4,6 @@
  */
 
 #include QMK_KEYBOARD_H
-#include "keymap_french.h"
 #include "sendstring_french.h"
 #include "eeconfig.h"
 #include "leader.h"
@@ -13,7 +12,7 @@
 #include "features/vim_navigation.h"
 
 /* Current layout tracking */
-static uint8_t current_layout = LAYOUT_AZERTY;
+static uint8_t current_layout = LAYOUT_AZERTY_STANDARD;
 
 /* Alt-Tab tracking */
 static bool is_alt_tab_active = false;
@@ -42,8 +41,11 @@ void keyboard_post_init_user(void) {
     // Set initial RGB mode based on layout
     #ifdef RGB_MATRIX_ENABLE
     switch (current_layout) {
-        case LAYOUT_AZERTY:
-            rgb_matrix_sethsv_noeeprom(0, 255, 255);    // Red for AZERTY
+        case LAYOUT_AZERTY_STANDARD:
+            rgb_matrix_sethsv_noeeprom(0, 255, 255);    // Red for AZERTY standard
+            break;
+        case LAYOUT_AZERTY_AFNOR:
+            rgb_matrix_sethsv_noeeprom(21, 255, 192)    // Orange for AZERTY Afnor
             break;
         case LAYOUT_QWERTY:
             rgb_matrix_sethsv_noeeprom(120, 255, 255);  // Green for QWERTY
@@ -57,14 +59,24 @@ void keyboard_post_init_user(void) {
 
 /* Main keymap */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    /* AZERTY base layer*/
-    [AZE_BASE] = LAYOUT(
+    /* AZERTY standard base layer*/
+    [AZE_STD_BASE] = LAYOUT(
         /* 1       2        3        4        5        6        7        8        9        10       11       12       13       14       15       16  */
         KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,           KC_MUTE,
-        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,          KC_PSCR,
-        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,                   KC_INS,
-        LT_NAVI, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_NUHS, KC_ENT,           KC_PGUP,
-        KC_LSFT, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,          KC_RSFT, KC_UP,   KC_PGDN,
+        FR_SUP2, FR_AMPR, FR_EACU, FR_DQUO, FR_QUOT, FR_LPRN, FR_MINS, FR_EGRV, FR_UNDS, FR_CCED, FR_AGRV, FR_RPRN, FR_EQL,  KC_BSPC,          KC_PSCR,
+        KC_TAB,  FR_A,    FR_Z,    FR_E,    FR_R,    FR_T,    FR_Y,    FR_U,    FR_I,    FR_O,    FR_P,    FR_CIRC, FR_DLR,                    KC_INS,
+        LT_NAVI, FR_Q,    FR_S,    FR_D,    FR_F,    FR_G,    FR_H,    FR_J,    FR_K,    FR_L,    FR_M,    FR_UGRV, FR_ASTR, KC_ENT,           KC_PGUP,
+        KC_LSFT, FR_LABK, FR_W,    FR_X,    FR_C,    FR_V,    FR_B,    FR_N,    FR_COMM, FR_SCLN, FR_COLN, FR_EXLM,          KC_RSFT, KC_UP,   KC_PGDN,
+        KC_LCTL, MO_FUNC, KC_LALT,                            KC_SPC,                             KC_RALT, TD_RGUI, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
+    ),
+    /* AZERTY Afnor base layer*/
+    [AZE_AFN_BASE] = LAYOUT(
+        /* 1       2        3        4        5        6        7        8        9        10       11       12       13       14       15       16  */
+        KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,           KC_MUTE,
+        FR_SUP2, FR_AMPR, FR_EACU, FR_DQUO, FR_QUOT, FR_LPRN, FR_MINS, FR_EGRV, FR_UNDS, FR_CCED, FR_AGRV, FR_RPRN, FR_EQL,  KC_BSPC,          KC_PSCR,
+        KC_TAB,  FR_A,    FR_Z,    FR_E,    FR_R,    FR_T,    FR_Y,    FR_U,    FR_I,    FR_O,    FR_P,    FR_CIRC, FR_DLR,                    KC_INS,
+        LT_NAVI, FR_Q,    FR_S,    FR_D,    FR_F,    FR_G,    FR_H,    FR_J,    FR_K,    FR_L,    FR_M,    FR_UGRV, FR_ASTR, KC_ENT,           KC_PGUP,
+        KC_LSFT, FR_LABK, FR_W,    FR_X,    FR_C,    FR_V,    FR_B,    FR_N,    FR_COMM, FR_SCLN, FR_COLN, FR_EXLM,          KC_RSFT, KC_UP,   KC_PGDN,
         KC_LCTL, MO_FUNC, KC_LALT,                            KC_SPC,                             KC_RALT, TD_RGUI, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
     ),
     /* QWERTY base layer*/
@@ -112,8 +124,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         /* 1        2           3        4           5             6        7        8           9         10           11       12             13           14       15       16  */
         _______, _______,    _______, _______,    _______,      _______, _______, _______,    _______,   _______,     _______, _______,       _______,     _______,          _______,
         _______, _______,    _______, _______,    _______,      _______, _______, _______,    _______,   _______,     _______, _______,       _______,     _______,          _______,
-        _______, _______,    _______, FR_E_ACUTE, _______,      _______, _______, FR_U_GRAVE, FR_I_CIRC, FR_O_CIRC,   _______, SMART_BRACKET, SMART_BRACE,                   _______,
-        _______, FR_A_GRAVE, _______, _______,    _______,      _______, _______, _______,    _______,   _______,     _______, SMART_QUOTE,   _______,     _______,          _______,
+        _______, _______,    _______, _______,    FR_EACU,      _______, _______, FR_U_GRAVE, FR_I_CIRC, FR_O_CIRC,   _______, SMART_BRACKET, SMART_BRACE,                   _______,
+        _______, _______,    _______, FR_EGRV,    _______,      _______, _______, _______,    _______,   _______,     _______, SMART_QUOTE,   _______,     _______,          _______,
         _______, _______,    _______, _______,    FR_C_CEDILLA, _______, _______, _______,    _______,   SMART_ANGLE, _______, _______,                    _______, _______, _______,
         _______, _______,    _______,                                    _______,                                     _______, _______,       _______,     _______, _______, _______
     ),
@@ -147,7 +159,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [SYST] = LAYOUT(
         /* 1        2        3        4        5        6        7        8        9       10       11       12       13       14       15       16  */
         TG_SYST, QK_BOOT, QK_MAKE, DB_TOGG, QK_RBT,  EE_CLR,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
-        XXXXXXX, LAY_AZE, LAY_QWE, LAY_BPO, XXXXXXX, TO_GAME, TO_NUMP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,          XXXXXXX,
+        XXXXXXX, LAY_AZE_STD, LAY_QWE, LAY_BPO, XXXXXXX, TO_GAME, TO_NUMP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,          XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX,
@@ -172,13 +184,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     switch (keycode) {
         /* Layout switching */
-        case LAY_AZE:
+        case LAY_AZE_STD:
             if (record->event.pressed) {
-                current_layout = LAYOUT_AZERTY;
+                current_layout = LAYOUT_AZERTY_STANDARD;
                 user_config.layout = current_layout;
                 eeconfig_update_kb(user_config.raw);
                 #ifdef RGB_MATRIX_ENABLE
-                rgb_matrix_sethsv_noeeprom(0, 255, 255);    // Red for AZERTY
+                rgb_matrix_sethsv_noeeprom(0, 255, 255);    // Red for AZERTY standard
+                #endif
+            }
+            return false;
+
+        case LAY_AZE_AFN:
+            if (record->event.pressed) {
+                current_layout = LAYOUT_AZERTY_AFNOR;
+                user_config.layout = current_layout;
+                eeconfig_update_kb(user_config.raw);
+                #ifdef RGB_MATRIX_ENABLE
+                rgb_matrix_sethsv_noeeprom(21, 255, 192);    // Orange for AZERTY Afnor
                 #endif
             }
             return false;
@@ -205,45 +228,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
 
-        /* French accents - lowercase */
-        case FR_E_ACUTE:
-            if (record->event.pressed) {
-                type_unicode_string("é");
-            }
-            return false;
-
-        case FR_E_GRAVE:
-            if (record->event.pressed) {
-                type_unicode_string("è");
-            }
-            return false;
-
-        case FR_A_GRAVE:
-            if (record->event.pressed) {
-                type_unicode_string("à");
-            }
-            return false;
-
-        case FR_U_GRAVE:
-            if (record->event.pressed) {
-                type_unicode_string("ù");
-            }
-            return false;
-
-        case FR_C_CEDILLA:
-            if (record->event.pressed) {
-                type_unicode_string("ç");
-            }
-            return false;
-
         /* French accents - uppercase (with shift) */
-        case FR_E_ACUTE_MAJ:
+        case FR_EACU_MAJ:
             if (record->event.pressed) {
                 type_unicode_string("É");
             }
             return false;
 
-        case FR_E_GRAVE_MAJ:
+        case FR_EGRV_MAJ:
             if (record->event.pressed) {
                 type_unicode_string("È");
             }

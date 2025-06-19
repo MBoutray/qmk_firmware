@@ -66,15 +66,11 @@ const uint16_t ascii_map[128] = {
 
 // Unicode hex codes for French accents (indexed by unsigned char)
 const uint32_t PROGMEM unicode_map[] = {
-    [FR_E_ACUTE]       = 0x00E9,  // é
-    [FR_E_GRAVE]       = 0x00E8,  // è
-    [FR_A_GRAVE]       = 0x00E0,  // à
-    [FR_U_GRAVE]       = 0x00F9,  // ù
-    [FR_C_CEDILLA]     = 0x00E7,  // ç
-    [FR_E_ACUTE_MAJ]   = 0x00C9,  // É
-    [FR_E_GRAVE_MAJ]   = 0x00C8,  // È
-    [FR_A_GRAVE_MAJ]   = 0x00C0,  // À
-    [FR_C_CEDILLA_MAJ] = 0x00C7   // Ç
+    [FR_EACU_MAJ] = 0x00C9,  // É
+    [FR_EGRV_MAJ] = 0x00C8,  // È
+    [FR_AGRV_MAJ] = 0x00C0,  // À
+    [FR_ECIR_MAJ] = 0x00CA,  // Ê
+    [FR_CCED_MAJ] = 0x00C7   // Ç
 };
 
 void type_unicode_string(const char *str) {

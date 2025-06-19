@@ -5,6 +5,7 @@
 #pragma once
 
 #include "quantum.h"
+#include "keymap_french.h"
 
 /* Tap dance actions */
 void dance_rgui_sym_finished(tap_dance_state_t *state, void *user_data);
@@ -22,7 +23,8 @@ void type_unicode_string(const char *str);
 /* Custom Keycodes */
 enum custom_keycodes {
     // Layout switching
-    LAY_AZE = SAFE_RANGE,   // Switch to AZERTY
+    LAY_AZE_STD = SAFE_RANGE,   // Switch to AZERTY Standard
+    LAY_AZE_AFN,   // Switch to AZERTY Afnor
     LAY_QWE,                // Switch to QWERTY
     LAY_BPO,                // Switch to BÉPO
 
@@ -40,27 +42,15 @@ enum custom_keycodes {
     VIM_G,                  // End of document
 
     // French accents (lowercase)
-    FR_E_ACUTE,             // é
-    FR_E_GRAVE,             // è
-    FR_A_GRAVE,             // à
-    FR_U_GRAVE,             // ù
-    FR_C_CEDILLA,           // ç
-    FR_E_CIRC,              // ê
-    FR_A_CIRC,              // â
-    FR_I_CIRC,              // î
-    FR_O_CIRC,              // ô
-    FR_U_CIRC,              // û
-    FR_E_TREMA,             // ë
-    FR_I_TREMA,             // ï
-    FR_U_TREMA,             // ü
-    FR_OE,                  // œ
-    FR_AE,                  // æ
+    FR_OE,                  // œ (not present on AZERTY kb)
+    FR_AE,                  // æ (not present on AZERTY kb)
 
     // French accents (uppercase)
-    FR_E_ACUTE_MAJ,         // É
-    FR_E_GRAVE_MAJ,         // È
-    FR_A_GRAVE_MAJ,         // À
-    FR_C_CEDILLA_MAJ,       // Ç
+    FR_EACU_MAJ,            // É (not present on AZERTY kb)
+    FR_EGRV_MAJ,            // È (not present on AZERTY kb)
+    FR_AGRV_MAJ,            // À (not present on AZERTY kb)
+    FR_ECIR_MAJ,            // Ê (not present on AZERTY kb)
+    FR_CCED_MAJ,            // Ç (not present on AZERTY kb)
 
     // Smart brackets
     SMART_PAREN,            // ()
@@ -96,7 +86,8 @@ enum custom_keycodes {
 
 /* Layer definitions */
 enum layers {
-    AZE_BASE = 0,           // Base layer - AZERTY layout
+    AZE_STD_BASE = 0,           // Base layer - AZERTY layout
+    AZE_AFN_BASE,           // Base layer - AZERTY layout, AFNOR version
     QWE_BASE,               // Base layer - QWERTY layout
     BEP_BASE,               // Base layer - BÉPO layout
     FUNC,                   // Function layer
@@ -109,7 +100,8 @@ enum layers {
 
 /* Layout types */
 enum layout_types {
-    LAYOUT_AZERTY = 0,
+    LAYOUT_AZERTY_STANDARD = 0,
+    LAYOUT_AZERTY_AFNOR,
     LAYOUT_QWERTY,
     LAYOUT_BEPO,
     LAYOUT_COUNT
