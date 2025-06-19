@@ -96,13 +96,15 @@ enum custom_keycodes {
 
 /* Layer definitions */
 enum layers {
-    _BASE = 0,              // Base layer (AZERTY/QWERTY/BÉPO)
-    _FN,                    // Function layer
-    _SYS,                   // System administration layer
-    _NAV,                   // Navigation layer
-    _SYM,                   // Symbols layer
-    _GAME,                  // Gaming layer (no custom keys)
-    _NUM                    // Numpad layer
+    AZE_BASE = 0,           // Base layer - AZERTY layout
+    QWE_BASE,               // Base layer - QWERTY layout
+    BEP_BASE,               // Base layer - BÉPO layout
+    FUNC,                   // Function layer
+    SYST,                   // System administration layer
+    NAVI,                   // Navigation layer
+    SYMB,                   // Symbols layer
+    GAME,                   // Gaming layer (no custom keys)
+    NUMP                    // Numpad layer
 };
 
 /* Layout types */
@@ -125,17 +127,23 @@ enum tap_dances {
 #define NAV_L VIM_L
 
 /* Momentary layer shortcuts */
-#define MO_FN MO(_FN)
-#define MO_SYS MO(_SYS)
-#define MO_NAV MO(_NAV)
-#define MO_SYM MO(_SYM)
+#define MO_FUNC MO(FUNC)
+#define MO_SYST MO(SYST)
+#define MO_NAVI MO(NAVI)
+#define MO_SYMB MO(SYMB)
 
 /* Layer-tap shortcuts */
-#define LT_NAV LT(_NAV, KC_CAPS)
+#define LT_NAVI LT(NAVI, KC_CAPS)
 
 /* Tap dance */
 #define TD_RGUI TD(TD_RGUI_SYM)
 
 /* Layer toggle shortcuts */
-#define TG_GAME TG(_GAME)
-#define TG_NUM TG(_NUM)
+#define TG_GAME TG(GAME)
+#define TG_NUMP TG(NUMP)
+#define TG_SYST TG(SYST)
+
+/* Turn on a layer, turn off the rest (except base) */
+#define TO_SYST TO(SYST)
+#define TO_GAME TO(GAME)
+#define TO_NUMP TO(NUMP)

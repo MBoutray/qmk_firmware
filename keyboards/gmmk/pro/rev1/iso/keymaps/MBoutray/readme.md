@@ -25,7 +25,7 @@ A professional QMK configuration for the GMMK Pro ISO keyboard featuring multipl
 
 ### Layer Structure
 1. **Base Layer** (_BASE): Main typing layer (layout-dependent)
-2. **Function Layer** (_FN): Media controls and F13-F17
-3. **System Layer** (_SYS): RGB control, layout switching, bootloader
-4. **Navigation Layer** (_NAV): Vim-style cursor movement
+2. **Function Layer** (FUNC): Media controls and F13-F17
+3. **System Layer** (SYST): RGB control, layout switching, bootloader
+4. **Navigation Layer** (NAVI): Vim-style cursor movement
 5. **Symbol

@@ -14,7 +14,7 @@ void dance_rgui_sym_finished(tap_dance_state_t *state, void *user_data) {
         tap_code16(KC_RGUI);
     } else if (state->count == 2) {
         // Double tap: Symbols layer
-        layer_on(_SYM);
+        layer_on(SYMB);
         sym_one_shot = true;  // Enable one-shot for symbols
     }
 }
@@ -43,7 +43,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case MT(MOD_LCTL, KC_ESC):
             return 100;  // Faster response for Ctrl/Esc
-        case LT(_NAV, KC_CAPS):
+        case LT(NAVI, KC_CAPS):
             return 150;  // Slightly faster for nav layer
         default:
             return TAPPING_TERM;

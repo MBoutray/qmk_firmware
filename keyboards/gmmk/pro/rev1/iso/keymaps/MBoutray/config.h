@@ -105,7 +105,7 @@
 #define EECONFIG_USER_DATA_SIZE 4
 
 /* Layer Configuration */
-#define LAYER_STATE_8BIT  // Support up to 8 layers
+#define LAYER_STATE_16BIT  // Support up to 16 layers
 
 /* Encoder Configuration */
 #define ENCODER_RESOLUTION 4

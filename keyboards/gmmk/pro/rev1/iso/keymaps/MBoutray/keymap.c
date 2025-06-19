@@ -57,58 +57,49 @@ void keyboard_post_init_user(void) {
 
 /* Main keymap */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    /* Base Layer - Dynamic based on current_layout */
-    [_BASE] = LAYOUT(
+    /* AZERTY base layer*/
+    [AZE_BASE] = LAYOUT(
+        /* 1       2        3        4        5        6        7        8        9        10       11       12       13       14       15       16  */
         KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,           KC_MUTE,
         KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,          KC_PSCR,
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,                   KC_INS,
-        LT_NAV,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_NUHS, KC_ENT,           KC_PGUP,
+        LT_NAVI, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_NUHS, KC_ENT,           KC_PGUP,
         KC_LSFT, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,          KC_RSFT, KC_UP,   KC_PGDN,
-        KC_LCTL, MO_FN,   KC_LALT,                            KC_SPC,                             KC_RALT, TD_RGUI, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
+        KC_LCTL, MO_FUNC, KC_LALT,                            KC_SPC,                             KC_RALT, TD_RGUI, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
     ),
-
-    /* Function Layer - Media & Function Keys */
-    // [_FN] = LAYOUT(
-    //     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______,
-    //     _______, _______, _______,                            _______,                            _______, _______, _______, _______, _______, _______
-    // ),
-    [_FN] = LAYOUT(
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
-        _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,                   _______,
-        KC_CAPS, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______,
+    /* QWERTY base layer*/
+    [QWE_BASE] = LAYOUT(
+        /* 1       2        3        4        5        6        7        8        9        10       11       12       13       14       15       16  */
+        KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,           KC_MUTE,
+        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,          KC_PSCR,
+        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,                   KC_INS,
+        LT_NAVI, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_NUHS, KC_ENT,           KC_PGUP,
+        KC_LSFT, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,          KC_RSFT, KC_UP,   KC_PGDN,
+        KC_LCTL, MO_FUNC, KC_LALT,                            KC_SPC,                             KC_RALT, TD_RGUI, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
+    ),
+    /* BEPO base layer*/
+    [BEP_BASE] = LAYOUT(
+        /* 1       2        3        4        5        6        7        8        9        10       11       12       13       14       15       16  */
+        KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,           KC_MUTE,
+        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,          KC_PSCR,
+        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,                   KC_INS,
+        LT_NAVI, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_NUHS, KC_ENT,           KC_PGUP,
+        KC_LSFT, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,          KC_RSFT, KC_UP,   KC_PGDN,
+        KC_LCTL, MO_FUNC, KC_LALT,                            KC_SPC,                             KC_RALT, TD_RGUI, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
+    ),
+    /* Function layer */
+    [FUNC] = LAYOUT(
+        /* 1        2        3        4        5        6        7        8        9       10       11       12       13       14       15       16  */
+        TO_SYST,  _______, _______, KC_F13, KC_F14,  KC_F15,  KC_F16,  KC_F17,  KC_F18,  KC_F19,  KC_F20,  KC_F21,  KC_F22,  _______,          _______,
+        _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          KC_F23,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,                   KC_F24,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          KC_HOME,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, KC_END,
         _______, _______, _______,                            _______,                            _______, _______, _______, _______, _______, _______
     ),
-    // _, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_SLEP,          _______,
-    //     _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, _______, _______, _______, _______, _______, KC_MUTE, KC_VOLD, KC_VOLU, _______,          KC_CALC,
-    //     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,                   KC_MAIL,
-    //     KC_CAPS, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          KC_HOME,
-    //     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, KC_END,
-    //     _______, _______, _______,                            _______,                            _______, MO_SYS,  _______, _______, _______, _______
-    // ),
-    [_SYS] = LAYOUT(
-    /*     1        2              3               4        5             6            7                 8        9       10       11       12       13        14       15       16   */
-        QK_BOOT, _______,       _______,        _______, _______,      _______,     _______,          _______, _______, _______, _______, _______, _______,  _______,          _______,
-        _______, LAY_AZE,       LAY_QWE,        LAY_BPO, _______,      _______,     _______,          _______, _______, _______, RGB_TOG, RGB_VAD, RGB_VAI,  _______,          NK_TOGG,
-        _______, _______,       _______,        _______, _______,      _______,     _______,          _______, RGB_HUI, RGB_SAI, RGB_SPI, RGB_MOD, RGB_RMOD,                   AS_TOGG,
-        _______, RGB_REAC_WIDE, RGB_REAC_MWIDE, RGB_SPL, RGB_MULT_SPL, RGB_SOL_SPL, RGB_SOL_MULT_SPL, _______, _______, _______, _______, _______, _______,  _______,          TG_GAME,
-        _______, _______,       _______,        _______, _______,      _______,     _______,          _______, _______, _______, _______, _______,           _______, _______, _______,
-        _______, _______,       _______,                                            _______,                                     _______, _______, _______,  _______, _______, _______
-    ),
-
-    // /* System Administration Layer */
-    // [_SYS] = LAYOUT(
-    //     QK_BOOT, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, EEP_RST,          _______,
-    //     _______, LAY_AZE, LAY_QWE, LAY_BPO, _______, _______, _______, _______, _______, _______, RGB_TOG, RGB_VAD, RGB_VAI, _______,          NK_TOGG,
-    //     _______, _______, _______, _______, _______, _______, _______, _______, RGB_HUI, RGB_SAI, RGB_SPI, RGB_MOD, RGB_RMOD,                  AS_TOGG,
-    //     _______, RGB_REAC_WIDE, RGB_REAC_MWIDE, RGB_SPL, RGB_MULT_SPL, RGB_SOL_SPL, RGB_SOL_MULT_SPL, _______, _______, _______, _______, _______, _______, _______,          TG_GAME,
-    //     _______, _______, ______
-
-
-    /* Navigation Layer - Vim-style */
-    [_NAV] = LAYOUT(
-    /*     1        2        3        4        5        6        7        8        9       10       11       12       13       14       15       16   */
+    /* Navigation layer - VIM-like cursor movement */
+    [NAVI] = LAYOUT(
+        /* 1        2        3        4        5        6        7        8        9       10       11       12       13       14       15       16  */
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
         _______, _______, VIM_W,   VIM_E,   _______, _______, _______, _______, _______, _______, _______, _______, _______,                   _______,
@@ -116,9 +107,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______, _______, VIM_B,   _______, _______, _______, _______, _______,          _______, _______, _______,
         _______, _______, _______,                            _______,                            _______, _______, _______, _______, _______, _______
     ),
-
     /* Symbols Layer - Programming & French Accents */
-    [_SYM] = LAYOUT(
+    [SYMB] = LAYOUT(
+        /* 1        2           3        4           5             6        7        8           9         10           11       12             13           14       15       16  */
         _______, _______,    _______, _______,    _______,      _______, _______, _______,    _______,   _______,     _______, _______,       _______,     _______,          _______,
         _______, _______,    _______, _______,    _______,      _______, _______, _______,    _______,   _______,     _______, _______,       _______,     _______,          _______,
         _______, _______,    _______, FR_E_ACUTE, _______,      _______, _______, FR_U_GRAVE, FR_I_CIRC, FR_O_CIRC,   _______, SMART_BRACKET, SMART_BRACE,                   _______,
@@ -126,25 +117,41 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______,    _______, _______,    FR_C_CEDILLA, _______, _______, _______,    _______,   SMART_ANGLE, _______, _______,                    _______, _______, _______,
         _______, _______,    _______,                                    _______,                                     _______, _______,       _______,     _______, _______, _______
     ),
-
-    /* Gaming Layer - No custom keys */
-    [_GAME] = LAYOUT(
-        KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,           KC_MUTE,
-        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,          TG_GAME,
-        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,                   _______,
-        KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_NUHS, KC_ENT,           _______,
-        KC_LSFT, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,          KC_RSFT, KC_UP,   _______,
-        KC_LCTL, KC_LGUI, KC_LALT,                            KC_SPC,                             KC_RALT, KC_RGUI, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
-    ),
-
     /* Numpad Layer */
-    [_NUM] = LAYOUT(
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          TG_NUM,
-        _______, _______, _______, _______, _______, _______, _______, KC_P7,   KC_P8,   KC_P9,   KC_PSLS, _______, _______, _______,          _______,
+    [NUMP] = LAYOUT(
+        /* 1        2        3        4        5        6        7        8        9       10       11       12       13       14       15       16  */
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
+        _______, _______, _______, _______, _______, _______, _______, KC_P7,   KC_P8,   KC_P9,   KC_PSLS, _______, _______, _______,          TG_NUMP,
         _______, _______, _______, _______, _______, _______, _______, KC_P4,   KC_P5,   KC_P6,   KC_PAST, _______, _______,                   _______,
         _______, _______, _______, _______, _______, _______, _______, KC_P1,   KC_P2,   KC_P3,   KC_PMNS, _______, _______, KC_PENT,          _______,
         _______, _______, _______, _______, _______, _______, _______, KC_P0,   KC_P0,   KC_PDOT, KC_PPLS, _______,          _______, _______, _______,
         _______, _______, _______,                            _______,                            _______, _______, _______, _______, _______, _______
+    ),
+    /* Gaming Layer - No custom keys */
+    [GAME] = LAYOUT(
+        /* 1        2        3        4        5        6        7        8        9       10       11       12       13       14       15       16  */
+        KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,           KC_MUTE,
+        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,          TG_GAME,
+        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,                   KC_INS,
+        KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_NUHS, KC_ENT,           KC_PGUP,
+        KC_LSFT, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,          KC_RSFT, KC_UP,   KC_PGDN,
+        KC_LCTL, KC_LGUI, KC_LALT,                            KC_SPC,                             KC_RALT, KC_RGUI, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
+    ),
+    // /* System Administration Layer */
+    // [_SYS] = LAYOUT(
+    //     QK_BOOT, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, EEP_RST,          _______,
+    //     _______, LAY_AZE, LAY_QWE, LAY_BPO, _______, _______, _______, _______, _______, _______, RGB_TOG, RGB_VAD, RGB_VAI, _______,          NK_TOGG,
+    //     _______, _______, _______, _______, _______, _______, _______, _______, RGB_HUI, RGB_SAI, RGB_SPI, RGB_MOD, RGB_RMOD,                  AS_TOGG,
+    //     _______, RGB_REAC_WIDE, RGB_REAC_MWIDE, RGB_SPL, RGB_MULT_SPL, RGB_SOL_SPL, RGB_SOL_MULT_SPL, _______, _______, _______, _______, _______, _______, _______,          TG_GAME,
+    //     _______, _______, ______
+    [SYST] = LAYOUT(
+        /* 1        2        3        4        5        6        7        8        9       10       11       12       13       14       15       16  */
+        TG_SYST, QK_BOOT, QK_MAKE, DB_TOGG, QK_RBT,  EE_CLR,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
+        XXXXXXX, LAY_AZE, LAY_QWE, LAY_BPO, XXXXXXX, TO_GAME, TO_NUMP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,          XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     ),
 };
 
@@ -378,7 +385,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         default:
             // Reset one-shot symbol layer if necessary
             if(sym_one_shot && record->event.pressed && keycode != TD(TD_RGUI_SYM)) {
-                layer_off(_SYM);
+                layer_off(SYMB);
                 sym_one_shot = false;
             }
     }
@@ -391,7 +398,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
         // Check which layer we're on
         switch (get_highest_layer(layer_state)) {
-            case _FN:
+            case FUNC:
                 // Media control on function layer
                 if (clockwise) {
                     tap_code(KC_MNXT);
@@ -399,7 +406,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                     tap_code(KC_MPRV);
                 }
                 break;
-            case _SYS:
+            case SYST:
                 // RGB brightness on system layer
                 if (clockwise) {
                     rgb_matrix_increase_val();
@@ -436,19 +443,19 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     // Visual feedback for active layers
     #ifdef RGB_MATRIX_ENABLE
     switch (get_highest_layer(state)) {
-        case _FN:
+        case FUNC:
             rgb_matrix_set_color_all(0, 0, 128);  // Blue for function layer
             break;
-        case _SYS:
+        case SYST:
             rgb_matrix_set_color_all(128, 0, 0);  // Red for system layer
             break;
-        case _NAV:
+        case NAVI:
             rgb_matrix_set_color_all(0, 128, 0);  // Green for navigation
             break;
-        case _SYM:
+        case SYMB:
             rgb_matrix_set_color_all(128, 128, 0); // Yellow for symbols
             break;
-        case _GAME:
+        case GAME:
             rgb_matrix_set_color_all(128, 0, 128); // Purple for gaming
             break;
         default:
