@@ -83,13 +83,6 @@ enum custom_keycodes {
     SYS_WAKE,               // System wake
     EEPROM_RESET,           // Reset EEPROM
 
-    // Macro recording
-    DYN_REC_START1,         // Start recording macro 1
-    DYN_REC_START2,         // Start recording macro 2
-    DYN_REC_STOP,           // Stop recording
-    DYN_MACRO_PLAY1,        // Play macro 1
-    DYN_MACRO_PLAY2,        // Play macro 2
-
     // Special functions
     ALT_TAB,                // Alt-Tab functionality
     CMD_TAB,                // Cmd-Tab for macOS
@@ -109,8 +102,7 @@ enum layers {
     _NAV,                   // Navigation layer
     _SYM,                   // Symbols layer
     _GAME,                  // Gaming layer (no custom keys)
-    _NUM,                   // Numpad layer
-    _MACRO                  // Macro layer
+    _NUM                    // Numpad layer
 };
 
 /* Layout types */
