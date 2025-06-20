@@ -86,8 +86,8 @@ static const afnor_keycode_mapping_t PROGMEM afnor_mappings[] = {
     { AF_DOT,  AF_QUES, AF_IQUE, XXXXXXX },
     { AF_COMM, AF_EXLM, AF_IEXL, AF_DCMM },
     { AF_COLN, AF_ELLP, AF_MDDT, XXXXXXX },
-    { AF_SCLN, AF_EQL,  AF_AEQL, AF_NEQL },
-}
+    { AF_SCLN, AF_EQL,  AF_AEQL, AF_NEQL }
+};
 
 bool process_afnor_keycodes(uint16_t keycode, keyrecord_t *record) {
     if (!record->event.pressed) return true;
