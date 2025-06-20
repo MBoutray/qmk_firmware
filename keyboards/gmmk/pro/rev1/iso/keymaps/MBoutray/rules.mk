@@ -26,7 +26,7 @@ TAP_DANCE_ENABLE = yes        # Enable tap dance functionality
 LEADER_ENABLE = no            # Enable leader key functionality
 AUTO_SHIFT_ENABLE = yes       # Enable auto shift
 DYNAMIC_MACRO_ENABLE = no     # Enable dynamic macros
-UNICODEMAP_ENABLE = yes       # Enable unicode support
+UNICODEMAP_ENABLE = no        # Enable unicode support
 KEY_OVERRIDE_ENABLE = no      # Enable key overrides
 COMBO_ENABLE = no             # Disable combos to save space
 

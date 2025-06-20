@@ -17,9 +17,6 @@ bool get_auto_shift_state(uint16_t keycode, keyrecord_t *record);
 /* Per-key tapping term */
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record);
 
-/* Unicode handling */
-void type_unicode_string(const char *str);
-
 /* Custom Keycodes */
 enum custom_keycodes {
     // Layout switching
