@@ -30,6 +30,100 @@ typedef union {
 
 user_config_t user_config;
 
+/* Afnor layout config */
+typedef struct {
+    uint16_t base;
+    uint16_t shift;
+    uint16_t altgr;
+    uint16_t shift_altgr;
+} afnor_keycode_mapping_t;
+
+static const afnor_keycode_mapping_t PROGMEM afnor_mappings[] = {
+    { AF_AT,   AF_HASH, AF_BREV, AF_IBRV },
+    { AF_AGRV, AF_1,    AF_SECT, AF_AGRV_CAPS },
+    { AF_EACU, AF_2,    AF_ACUT, AF_EACU_CAPS },
+    { AF_EGRV, AF_3,    AF_GRV,  AF_EGRV_CAPS },
+    { AF_ECIR, AF_4,    AF_AMPR, AF_ECIR_CAPS },
+    { AF_LPRN, AF_5,    AF_LBRC, AF_DACU },
+    { AF_RPRN, AF_6,    AF_RBRC, AF_DGRV },
+    { AF_LSQU, AF_7,    AF_MACR, XXXXXXX },
+    { AF_RSQU, AF_8,    AF_UNDS, AF_MDSH },
+    { AF_LDAQ, AF_9,    AF_LDQU, AF_LSAQ },
+    { AF_RDAQ, AF_0,    AF_RDQU, AF_RSAQ },
+    { AF_QUOT, AF_DQUO, AF_DEG,  AF_RNGA },
+    { AF_CIRC, AF_DIAE, AF_CARN, XXXXXXX },
+    { AF_A,    AF_A,    AF_AE,   AF_AE_CAPS },
+    { AF_Z,    AF_Z,    AF_PND,  XXXXXXX },
+    { AF_E,    AF_E,    AF_EURO, XXXXXXX },
+    { AF_R,    AF_R,    AF_REGD, XXXXXXX },
+    { AF_T,    AF_T,    AF_LCBR, AF_TM   },
+    { AF_Y,    AF_Y,    AF_RCBR, XXXXXXX },
+    { AF_U,    AF_U,    AF_UGRV, AF_UGRV_CAPS },
+    { AF_I,    AF_I,    AF_DOTA, AF_DOTB },
+    { AF_O,    AF_O,    AF_OE,   AF_OE_CAPS },
+    { AF_P,    AF_P,    AF_PERC, AF_PERM },
+    { AF_MINS, AF_NDSH, AF_MMNS, AF_NBHY },
+    { AF_PLUS, AF_PLMN, AF_DAGG, AF_DDAG },
+    { AF_Q,    AF_Q,    AF_THET, XXXXXXX },
+    { AF_S,    AF_S,    AF_SS,   AF_SS_CAPS },
+    { AF_D,    AF_D,    AF_DLR,  XXXXXXX },
+    { AF_F,    AF_F,    AF_CURR, XXXXXXX },
+    { AF_G,    AF_G,    AF_DGRK, XXXXXXX },
+    { AF_H,    AF_H,    AF_EU,   AF_MACB },
+    { AF_J,    AF_J,    XXXXXXX, XXXXXXX },
+    { AF_K,    AF_K,    AF_DSLS, XXXXXXX },
+    { AF_L,    AF_L,    AF_PIPE, XXXXXXX },
+    { AF_M,    AF_M,    AF_INFN, XXXXXXX },
+    { AF_SLSH, AF_BSLS, AF_DIV,  AF_SQRT },
+    { AF_ASTR, AF_HALF, AF_MUL,  AF_QRTR },
+    { AF_LABK, AF_RABK, AF_LEQL, AF_GEQL },
+    { AF_W,    AF_W,    AF_EZH,  AF_EZH_CAPS },
+    { AF_X,    AF_X,    AF_COPY, XXXXXXX },
+    { AF_C,    AF_C,    AF_CCED, AF_CCED_CAPS },
+    { AF_V,    AF_V,    AF_CEDL, AF_OGON },
+    { AF_B,    AF_B,    AF_DMNS, XXXXXXX },
+    { AF_N,    AF_N,    AF_DTIL, XXXXXXX },
+    { AF_DOT,  AF_QUES, AF_IQUE, XXXXXXX },
+    { AF_COMM, AF_EXLM, AF_IEXL, AF_DCMM },
+    { AF_COLN, AF_ELLP, AF_MDDT, XXXXXXX },
+    { AF_SCLN, AF_EQL,  AF_AEQL, AF_NEQL },
+}
+
+bool process_afnor_keycodes(uint16_t keycode, keyrecord_t *record) {
+    if (!record->event.pressed) return true;
+
+    bool shift = get_mods() & MOD_MASK_SHIFT;
+    bool altgr = get_mods() & MOD_BIT(KC_RALT);
+
+    if (shift && altgr) {
+        for (int i = 0; i < ARRAY_SIZE(afnor_mappings); i++) {
+            if (keycode == afnor_mappings[i].base) {
+                tap_code16(afnor_mappings[i].shift_altgr);
+                return false;
+            }
+        }
+        return true;
+    } else if (shift) {
+        for (int i = 0; i < ARRAY_SIZE(afnor_mappings); i++) {
+            if (keycode == afnor_mappings[i].base) {
+                tap_code16(afnor_mappings[i].shift);
+                return false;
+            }
+        }
+        return true;
+    } else if (altgr) {
+        for (int i = 0; i < ARRAY_SIZE(afnor_mappings); i++) {
+            if (keycode == afnor_mappings[i].base) {
+                tap_code16(afnor_mappings[i].altgr);
+                return false;
+            }
+        }
+        return true;
+    } else {
+        return true;
+    }
+}
+
 /* Initialize keyboard */
 void keyboard_post_init_user(void) {
     // Load saved layout from EEPROM
@@ -167,9 +261,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Process custom keycodes */
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    bool shift = get_mods() & MOD_MASK_SHIFT;
-    bool altgr = get_mods() & MOD_BIT(KC_RALT);
-
     // Process vim navigation first
     if (!process_vim_navigation(keycode, record)) {
         return false;
@@ -240,110 +331,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case AF_SLSH: case AF_ASTR: case AF_LABK: case AF_W:    case AF_X:
         case AF_C:    case AF_V:    case AF_B:    case AF_N:    case AF_DOT:
         case AF_COMM: case AF_COLN: case AF_SCLN:
-            if (record->event.pressed) {
-                if (shift && altgr) {
-                    switch (keycode) {
-                        case AF_AT:   tap_code16(AF_IBRV); break;
-                        case AF_LPRN: tap_code16(AF_DACU); break;
-                        case AF_RPRN: tap_code16(AF_DGRV); break;
-                        case AF_RSQU: tap_code16(AF_MDSH); break;
-                        case AF_LDAQ: tap_code16(AF_LSAQ); break;
-                        case AF_RDAQ: tap_code16(AF_RSAQ); break;
-                        case AF_QUOT: tap_code16(AF_RNGA); break;
-                        case AF_T:    tap_code16(AF_TM);   break;
-                        case AF_I:    tap_code16(AF_DOTB); break;
-                        case AF_P:    tap_code16(AF_PERM); break;
-                        case AF_MINS: tap_code16(AF_NBHY); break;
-                        case AF_PLUS: tap_code16(AF_DDAG); break;
-                        case AF_H:    tap_code16(AF_MACB); break;
-                        case AF_SLSH: tap_code16(AF_SQRT); break;
-                        case AF_ASTR: tap_code16(AF_QRTR); break;
-                        case AF_LABK: tap_code16(AF_GEQL); break;
-                        case AF_V:    tap_code16(AF_OGON); break;
-                        case AF_COMM: tap_code16(AF_DCMM); break;
-                        case AF_SCLN: tap_code16(AF_NEQL); break;
-                    }
-                } else if (shift) {
-                    switch (keycode)
-                    {
-                        case AF_AT:   tap_code16(AF_HASH); break;
-                        case AF_AGRV: tap_code16(AF_1);    break;
-                        case AF_EACU: tap_code16(AF_2);    break;
-                        case AF_EGRV: tap_code16(AF_3);    break;
-                        case AF_ECIR: tap_code16(AF_4);    break;
-                        case AF_LPRN: tap_code16(AF_5);    break;
-                        case AF_RPRN: tap_code16(AF_6);    break;
-                        case AF_LSQU: tap_code16(AF_7);    break;
-                        case AF_RSQU: tap_code16(AF_8);    break;
-                        case AF_LDAQ: tap_code16(AF_9);    break;
-                        case AF_RDAQ: tap_code16(AF_0);    break;
-                        case AF_QUOT: tap_code16(AF_DQUO); break;
-                        case AF_CIRC: tap_code16(AF_DIAE); break;
-                        case AF_MINS: tap_code16(AF_NDSH); break;
-                        case AF_PLUS: tap_code16(AF_PLMN); break;
-                        case AF_SLSH: tap_code16(AF_BSLS); break;
-                        case AF_ASTR: tap_code16(AF_HALF); break;
-                        case AF_LABK: tap_code16(AF_RABK); break;
-                        case AF_DOT:  tap_code16(AF_QUES); break;
-                        case AF_COMM: tap_code16(AF_EXLM); break;
-                        case AF_COLN: tap_code16(AF_ELLP); break;
-                        case AF_SCLN: tap_code16(AF_EQL);  break;
-                    }
-                } else if (altgr) {
-                    switch (keycode)
-                    {
-                        case AF_AT:   tap_code16(AF_BREV); break;
-                        case AF_AGRV: tap_code16(AF_SECT); break;
-                        case AF_EACU: tap_code16(AF_ACUT); break;
-                        case AF_EGRV: tap_code16(AF_GRV);  break;
-                        case AF_ECIR: tap_code16(AF_AMPR); break;
-                        case AF_LPRN: tap_code16(AF_LBRC); break;
-                        case AF_RPRN: tap_code16(AF_RBRC); break;
-                        case AF_LSQU: tap_code16(AF_MACR); break;
-                        case AF_RSQU: tap_code16(AF_UNDS); break;
-                        case AF_LDAQ: tap_code16(AF_LDQU); break;
-                        case AF_RDAQ: tap_code16(AF_RDQU); break;
-                        case AF_QUOT: tap_code16(AF_DEG);  break;
-                        case AF_CIRC: tap_code16(AF_CARN); break;
-                        case AF_A:    tap_code16(AF_AE);   break;
-                        case AF_Z:    tap_code16(AF_PND);  break;
-                        case AF_E:    tap_code16(AF_EURO); break;
-                        case AF_R:    tap_code16(AF_REGD); break;
-                        case AF_T:    tap_code16(AF_LCBR); break;
-                        case AF_Y:    tap_code16(AF_RCBR); break;
-                        case AF_U:    tap_code16(AF_UGRV); break;
-                        case AF_I:    tap_code16(AF_DOTA); break;
-                        case AF_O:    tap_code16(AF_OE);   break;
-                        case AF_P:    tap_code16(AF_PERC); break;
-                        case AF_MINS: tap_code16(AF_MMNS); break;
-                        case AF_PLUS: tap_code16(AF_DAGG); break;
-                        case AF_Q:    tap_code16(AF_THET); break;
-                        case AF_S:    tap_code16(AF_SS);   break;
-                        case AF_D:    tap_code16(AF_DLR);  break;
-                        case AF_F:    tap_code16(AF_CURR); break;
-                        case AF_G:    tap_code16(AF_DGRK); break;
-                        case AF_H:    tap_code16(AF_EU);   break;
-                        case AF_K:    tap_code16(AF_DSLS); break;
-                        case AF_L:    tap_code16(AF_PIPE); break;
-                        case AF_M:    tap_code16(AF_INFN); break;
-                        case AF_SLSH: tap_code16(AF_DIV);  break;
-                        case AF_ASTR: tap_code16(AF_MUL);  break;
-                        case AF_LABK: tap_code16(AF_LEQL); break;
-                        case AF_W:    tap_code16(AF_EZH);  break;
-                        case AF_X:    tap_code16(AF_COPY); break;
-                        case AF_C:    tap_code16(AF_CCED); break;
-                        case AF_V:    tap_code16(AF_CEDL); break;
-                        case AF_B:    tap_code16(AF_DMNS); break;
-                        case AF_N:    tap_code16(AF_DTIL); break;
-                        case AF_DOT:  tap_code16(AF_IQUE); break;
-                        case AF_COMM: tap_code16(AF_IEXL); break;
-                        case AF_COLN: tap_code16(AF_MDDT); break;
-                        case AF_SCLN: tap_code16(AF_AEQL); break;
-                    }
-                } else
-                    return true; // Default behavior for non-modified keys
-            }
-            return false;
+            return process_afnor_keycodes(keycode, record);
 
         /* Smart brackets */
         case SMART_PAREN:
