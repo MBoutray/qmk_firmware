@@ -45,7 +45,7 @@ void keyboard_post_init_user(void) {
             rgb_matrix_sethsv_noeeprom(0, 255, 255);    // Red for AZERTY standard
             break;
         case LAYOUT_AZERTY_AFNOR:
-            rgb_matrix_sethsv_noeeprom(21, 255, 192)    // Orange for AZERTY Afnor
+            rgb_matrix_sethsv_noeeprom(21, 255, 192);   // Orange for AZERTY Afnor
             break;
         case LAYOUT_QWERTY:
             rgb_matrix_sethsv_noeeprom(120, 255, 255);  // Green for QWERTY
