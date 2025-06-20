@@ -4,7 +4,6 @@
  */
 
 #include QMK_KEYBOARD_H
-#include "sendstring_french.h"
 #include "eeconfig.h"
 #include "leader.h"
 #include "features/custom_keycodes.h"
@@ -72,10 +71,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [AZE_AFN_BASE] = LAYOUT(
         /* 1       2        3        4        5        6        7        8        9        10       11       12       13       14       15       16  */
         KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,           KC_MUTE,
-        FR_SUP2, FR_AMPR, FR_EACU, FR_DQUO, FR_QUOT, FR_LPRN, FR_MINS, FR_EGRV, FR_UNDS, FR_CCED, FR_AGRV, FR_RPRN, FR_EQL,  KC_BSPC,          KC_PSCR,
-        KC_TAB,  FR_A,    FR_Z,    FR_E,    FR_R,    FR_T,    FR_Y,    FR_U,    FR_I,    FR_O,    FR_P,    FR_CIRC, FR_DLR,                    KC_INS,
-        LT_NAVI, FR_Q,    FR_S,    FR_D,    FR_F,    FR_G,    FR_H,    FR_J,    FR_K,    FR_L,    FR_M,    FR_UGRV, FR_ASTR, KC_ENT,           KC_PGUP,
-        KC_LSFT, FR_LABK, FR_W,    FR_X,    FR_C,    FR_V,    FR_B,    FR_N,    FR_COMM, FR_SCLN, FR_COLN, FR_EXLM,          KC_RSFT, KC_UP,   KC_PGDN,
+        AF_AT,   AF_AGRV, AF_EACU, AF_EGRV, AF_ECIR, AF_LPRN, AF_RPRN, AF_LSQU, AF_RSQU, AF_LDAQ, AF_RDAQ, AF_QUOT, AF_CIRC, KC_BSPC,          KC_PSCR,
+        KC_TAB,  AF_A,    AF_Z,    AF_E,    AF_R,    AF_T,    AF_Y,    AF_U,    AF_I,    AF_O,    AF_P,    AF_MINS, AF_PLUS,                   KC_INS,
+        LT_NAVI, AF_Q,    AF_S,    AF_D,    AF_F,    AF_G,    AF_H,    AF_J,    AF_K,    AF_L,    AF_M,    AF_SLSH, AF_ASTR, KC_ENT,           KC_PGUP,
+        KC_LSFT, AF_LABK, AF_W,    AF_X,    AF_C,    AF_V,    AF_B,    AF_N,    AF_DOT,  AF_COMM, AF_COLN, AF_SCLN,          KC_RSFT, KC_UP,   KC_PGDN,
         KC_LCTL, MO_FUNC, KC_LALT,                            KC_SPC,                             KC_RALT, TD_RGUI, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
     ),
     /* QWERTY base layer*/
@@ -120,13 +119,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     /* Symbols Layer - Programming & French Accents */
     [SYMB] = LAYOUT(
-        /* 1        2           3        4           5             6        7        8           9         10           11       12             13           14       15       16  */
-        _______, _______,    _______, _______,    _______,      _______, _______, _______,    _______,   _______,     _______, _______,       _______,     _______,          _______,
-        _______, _______,    _______, _______,    _______,      _______, _______, _______,    _______,   _______,     _______, _______,       _______,     _______,          _______,
-        _______, _______,    _______, _______,    FR_EACU,      _______, _______, FR_U_GRAVE, FR_I_CIRC, FR_O_CIRC,   _______, SMART_BRACKET, SMART_BRACE,                   _______,
-        _______, _______,    _______, FR_EGRV,    _______,      _______, _______, _______,    _______,   _______,     _______, SMART_QUOTE,   _______,     _______,          _______,
-        _______, _______,    _______, _______,    FR_C_CEDILLA, _______, _______, _______,    _______,   SMART_ANGLE, _______, _______,                    _______, _______, _______,
-        _______, _______,    _______,                                    _______,                                     _______, _______,       _______,     _______, _______, _______
+        /* 1        2           3        4        5        6        7        8        9       10           11       12             13           14       15       16  */
+        _______, _______,    _______, _______, _______, _______, _______, _______, _______, _______,     _______, _______,       _______,     _______,          _______,
+        _______, _______,    _______, _______, _______, _______, _______, _______, _______, _______,     _______, _______,       _______,     _______,          _______,
+        _______, _______,    _______, _______, FR_EACU, _______, _______, _______, _______, _______,     _______, SMART_BRACKET, SMART_BRACE,                   _______,
+        _______, _______,    _______, FR_EGRV, _______, _______, _______, _______, _______, _______,     _______, SMART_QUOTE,   _______,     _______,          _______,
+        _______, _______,    _______, _______, _______, _______, _______, _______, _______, SMART_ANGLE, _______, _______,                    _______, _______, _______,
+        _______, _______,    _______,                            _______,                                _______, _______,       _______,     _______, _______, _______
     ),
     /* Numpad Layer */
     [NUMP] = LAYOUT(
@@ -168,6 +167,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Process custom keycodes */
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    bool shift = get_mods() & MOD_MASK_SHIFT;
+    bool altgr = get_mods() & MOD_BIT(KC_RALT);
+
     // Process vim navigation first
     if (!process_vim_navigation(keycode, record)) {
         return false;
@@ -227,28 +229,119 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
 
-        /* French accents - uppercase (with shift) */
-        case FR_EACU_MAJ:
+        /* Custom keycodes for Afnor specific characters */
+        case AF_AT:   case AF_AGRV: case AF_EACU: case AF_EGRV: case AF_ECIR:
+        case AF_LPRN: case AF_RPRN: case AF_LSQU: case AF_RSQU: case AF_LDAQ:
+        case AF_RDAQ: case AF_QUOT: case AF_CIRC: case AF_A:    case AF_Z:
+        case AF_E:    case AF_R:    case AF_T:    case AF_Y:    case AF_U:
+        case AF_I:    case AF_O:    case AF_P:    case AF_MINS: case AF_PLUS:
+        case AF_Q:    case AF_S:    case AF_D:    case AF_F:    case AF_G:
+        case AF_H:    case AF_J:    case AF_K:    case AF_L:    case AF_M:
+        case AF_SLSH: case AF_ASTR: case AF_LABK: case AF_W:    case AF_X:
+        case AF_C:    case AF_V:    case AF_B:    case AF_N:    case AF_DOT:
+        case AF_COMM: case AF_COLN: case AF_SCLN:
             if (record->event.pressed) {
-                type_unicode_string("É");
-            }
-            return false;
-
-        case FR_EGRV_MAJ:
-            if (record->event.pressed) {
-                type_unicode_string("È");
-            }
-            return false;
-
-        case FR_A_GRAVE_MAJ:
-            if (record->event.pressed) {
-                type_unicode_string("À");
-            }
-            return false;
-
-        case FR_C_CEDILLA_MAJ:
-            if (record->event.pressed) {
-                type_unicode_string("Ç");
+                if (shift && altgr) {
+                    switch (keycode) {
+                        case AF_AT:   tap_code16(AF_IBRV); break;
+                        case AF_LPRN: tap_code16(AF_DACU); break;
+                        case AF_RPRN: tap_code16(AF_DGRV); break;
+                        case AF_RSQU: tap_code16(AF_MDSH); break;
+                        case AF_LDAQ: tap_code16(AF_LSAQ); break;
+                        case AF_RDAQ: tap_code16(AF_RSAQ); break;
+                        case AF_QUOT: tap_code16(AF_RNGA); break;
+                        case AF_T:    tap_code16(AF_TM);   break;
+                        case AF_I:    tap_code16(AF_DOTB); break;
+                        case AF_P:    tap_code16(AF_PERM); break;
+                        case AF_MINS: tap_code16(AF_NBHY); break;
+                        case AF_PLUS: tap_code16(AF_DDAG); break;
+                        case AF_H:    tap_code16(AF_MACB); break;
+                        case AF_SLSH: tap_code16(AF_SQRT); break;
+                        case AF_ASTR: tap_code16(AF_QRTR); break;
+                        case AF_LABK: tap_code16(AF_GEQL); break;
+                        case AF_V:    tap_code16(AF_OGON); break;
+                        case AF_COMM: tap_code16(AF_DCMM); break;
+                        case AF_SCLN: tap_code16(AF_NEQL); break;
+                    }
+                } else if (shift) {
+                    switch (keycode)
+                    {
+                        case AF_AT:   tap_code16(AF_HASH); break;
+                        case AF_AGRV: tap_code16(AF_1);    break;
+                        case AF_EACU: tap_code16(AF_2);    break;
+                        case AF_EGRV: tap_code16(AF_3);    break;
+                        case AF_ECIR: tap_code16(AF_4);    break;
+                        case AF_LPRN: tap_code16(AF_5);    break;
+                        case AF_RPRN: tap_code16(AF_6);    break;
+                        case AF_LSQU: tap_code16(AF_7);    break;
+                        case AF_RSQU: tap_code16(AF_8);    break;
+                        case AF_LDAQ: tap_code16(AF_9);    break;
+                        case AF_RDAQ: tap_code16(AF_0);    break;
+                        case AF_QUOT: tap_code16(AF_DQUO); break;
+                        case AF_CIRC: tap_code16(AF_DIAE); break;
+                        case AF_MINS: tap_code16(AF_NDSH); break;
+                        case AF_PLUS: tap_code16(AF_PLMN); break;
+                        case AF_SLSH: tap_code16(AF_BSLS); break;
+                        case AF_ASTR: tap_code16(AF_HALF); break;
+                        case AF_LABK: tap_code16(AF_RABK); break;
+                        case AF_DOT:  tap_code16(AF_QUES); break;
+                        case AF_COMM: tap_code16(AF_EXLM); break;
+                        case AF_COLN: tap_code16(AF_ELLP); break;
+                        case AF_SCLN: tap_code16(AF_EQL);  break;
+                    }
+                } else if (altgr) {
+                    switch (keycode)
+                    {
+                        case AF_AT:   tap_code16(AF_BREV); break;
+                        case AF_AGRV: tap_code16(AF_SECT); break;
+                        case AF_EACU: tap_code16(AF_ACUT); break;
+                        case AF_EGRV: tap_code16(AF_GRV);  break;
+                        case AF_ECIR: tap_code16(AF_AMPR); break;
+                        case AF_LPRN: tap_code16(AF_LBRC); break;
+                        case AF_RPRN: tap_code16(AF_RBRC); break;
+                        case AF_LSQU: tap_code16(AF_MACR); break;
+                        case AF_RSQU: tap_code16(AF_UNDS); break;
+                        case AF_LDAQ: tap_code16(AF_LDQU); break;
+                        case AF_RDAQ: tap_code16(AF_RDQU); break;
+                        case AF_QUOT: tap_code16(AF_DEG);  break;
+                        case AF_CIRC: tap_code16(AF_CARN); break;
+                        case AF_A:    tap_code16(AF_AE);   break;
+                        case AF_Z:    tap_code16(AF_PND);  break;
+                        case AF_E:    tap_code16(AF_EURO); break;
+                        case AF_R:    tap_code16(AF_REGD); break;
+                        case AF_T:    tap_code16(AF_LCBR); break;
+                        case AF_Y:    tap_code16(AF_RCBR); break;
+                        case AF_U:    tap_code16(AF_UGRV); break;
+                        case AF_I:    tap_code16(AF_DOTA); break;
+                        case AF_O:    tap_code16(AF_OE);   break;
+                        case AF_P:    tap_code16(AF_PERC); break;
+                        case AF_MINS: tap_code16(AF_MMNS); break;
+                        case AF_PLUS: tap_code16(AF_DAGG); break;
+                        case AF_Q:    tap_code16(AF_THET); break;
+                        case AF_S:    tap_code16(AF_SS);   break;
+                        case AF_D:    tap_code16(AF_DLR);  break;
+                        case AF_F:    tap_code16(AF_CURR); break;
+                        case AF_G:    tap_code16(AF_DGRK); break;
+                        case AF_H:    tap_code16(AF_EU);   break;
+                        case AF_K:    tap_code16(AF_DSLS); break;
+                        case AF_L:    tap_code16(AF_PIPE); break;
+                        case AF_M:    tap_code16(AF_INFN); break;
+                        case AF_SLSH: tap_code16(AF_DIV);  break;
+                        case AF_ASTR: tap_code16(AF_MUL);  break;
+                        case AF_LABK: tap_code16(AF_LEQL); break;
+                        case AF_W:    tap_code16(AF_EZH);  break;
+                        case AF_X:    tap_code16(AF_COPY); break;
+                        case AF_C:    tap_code16(AF_CCED); break;
+                        case AF_V:    tap_code16(AF_CEDL); break;
+                        case AF_B:    tap_code16(AF_DMNS); break;
+                        case AF_N:    tap_code16(AF_DTIL); break;
+                        case AF_DOT:  tap_code16(AF_IQUE); break;
+                        case AF_COMM: tap_code16(AF_IEXL); break;
+                        case AF_COLN: tap_code16(AF_MDDT); break;
+                        case AF_SCLN: tap_code16(AF_AEQL); break;
+                    }
+                } else
+                    return true; // Default behavior for non-modified keys
             }
             return false;
 
