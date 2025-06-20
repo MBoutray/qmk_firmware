@@ -192,11 +192,6 @@ enum custom_keycodes {
     RGB_SOL_SPL,
     RGB_SOL_MULT_SPL,
 
-    // System functions
-    SYS_SLEEP,              // System sleep
-    SYS_WAKE,               // System wake
-    EEPROM_RESET,           // Reset EEPROM
-
     // Special functions
     ALT_TAB,                // Alt-Tab functionality
     CMD_TAB,                // Cmd-Tab for macOS
