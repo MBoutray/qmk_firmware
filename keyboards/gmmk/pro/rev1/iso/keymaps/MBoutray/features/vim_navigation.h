@@ -1,7 +1,3 @@
-/* Copyright 2024 MBoutray
- * Vim-style navigation header file
- */
-
 #pragma once
 
 #include "quantum.h"

@@ -1,6 +1,3 @@
-/* Copyright 2024 MBoutray
- * Custom keycode implementations for advanced features
- */
 #include "custom_keycodes.h"
 
 extern bool sym_one_shot;

@@ -1,7 +1,3 @@
-/* Copyright 2024 MBoutray
- * Vim-style navigation implementation with modifier support
- */
-
 #include "vim_navigation.h"
 
 /* Navigation state tracking */
