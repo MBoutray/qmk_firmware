@@ -157,11 +157,11 @@ enum layers {
     QWE_BASE,               // Base layer - QWERTY layout
     BEP_BASE,               // Base layer - BÉPO layout
     FUNC,                   // Function layer
-    SYST,                   // System administration layer
     NAVI,                   // Navigation layer
     SYMB,                   // Symbols layer
-    GAME,                   // Gaming layer (no custom keys)
     NUMP,                   // Numpad layer
+    GAME,                   // Gaming layer (no custom keys)
+    SYST,                   // System administration layer
     RGB_MAT,                // RGB control layer
 };
 
