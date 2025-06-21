@@ -3,7 +3,6 @@
  */
 
 #include "vim_navigation.h"
-#include "custom_keycodes.h"
 
 /* Navigation state tracking */
 static bool vim_nav_active = false;
@@ -18,7 +17,7 @@ bool process_vim_navigation(uint16_t keycode, keyrecord_t *record) {
     bool ctrl_held = mods & MOD_MASK_CTRL;
     bool alt_held = mods & MOD_MASK_ALT;
     // bool gui_held = mods & MOD_MASK_GUI;
-    
+
     switch (keycode) {
         /* Basic movement */
         case VIM_H:
@@ -41,7 +40,7 @@ bool process_vim_navigation(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return false;
-            
+
         case VIM_J:
             if (record->event.pressed) {
                 if (ctrl_held && shift_held) {
@@ -62,7 +61,7 @@ bool process_vim_navigation(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return false;
-            
+
         case VIM_K:
             if (record->event.pressed) {
                 if (ctrl_held && shift_held) {
@@ -83,7 +82,7 @@ bool process_vim_navigation(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return false;
-            
+
         case VIM_L:
             if (record->event.pressed) {
                 if (ctrl_held && shift_held) {
@@ -104,7 +103,7 @@ bool process_vim_navigation(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return false;
-            
+
         /* Word movement */
         case VIM_W:
             if (record->event.pressed) {
@@ -117,7 +116,7 @@ bool process_vim_navigation(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return false;
-            
+
         case VIM_B:
             if (record->event.pressed) {
                 if (shift_held) {
@@ -129,7 +128,7 @@ bool process_vim_navigation(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return false;
-            
+
         case VIM_E:
             if (record->event.pressed) {
                 if (shift_held) {
@@ -143,7 +142,7 @@ bool process_vim_navigation(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return false;
-            
+
         /* Line movement */
         case VIM_0:
             if (record->event.pressed) {
@@ -156,7 +155,7 @@ bool process_vim_navigation(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return false;
-            
+
         case VIM_DLR:
             if (record->event.pressed) {
                 if (shift_held) {
@@ -168,7 +167,7 @@ bool process_vim_navigation(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return false;
-            
+
         /* Document movement */
         case VIM_GG:
             if (record->event.pressed) {
@@ -181,7 +180,7 @@ bool process_vim_navigation(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return false;
-            
+
         case VIM_G:
             if (record->event.pressed) {
                 if (vim_g_pressed && timer_elapsed(vim_g_timer) < TAPPING_TERM) {
@@ -205,7 +204,7 @@ bool process_vim_navigation(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
     }
-    
+
     return true;
 }
 
@@ -217,7 +216,7 @@ bool is_vim_nav_active(void) {
 /* Toggle vim navigation mode */
 void toggle_vim_nav(void) {
     vim_nav_active = !vim_nav_active;
-    
+
     // Visual feedback via RGB
     #ifdef RGB_MATRIX_ENABLE
     if (vim_nav_active) {

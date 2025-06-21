@@ -6,6 +6,7 @@
 
 #include "quantum.h"
 #include <stdbool.h>
+#include "custom_keycodes.h"
 
 /* Function declarations */
 bool process_vim_navigation(uint16_t keycode, keyrecord_t *record);
