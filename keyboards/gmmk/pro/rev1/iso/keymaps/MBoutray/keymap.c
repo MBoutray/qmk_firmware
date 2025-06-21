@@ -183,10 +183,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 #ifdef RGB_MATRIX_ENABLE
                 rgb_matrix_sethsv_noeeprom(0, 255, 255);    // Red for AZERTY standard
                 #endif
+                layer_move(AZE_STD_BASE);
             }
             return false;
 
-        case LAY_AZE_AFN:
+            case LAY_AZE_AFN:
             if (record->event.pressed) {
                 current_layout = LAYOUT_AZERTY_AFNOR;
                 user_config.layout = current_layout;
@@ -195,10 +196,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 #ifdef RGB_MATRIX_ENABLE
                 rgb_matrix_sethsv_noeeprom(21, 255, 192);    // Orange for AZERTY Afnor
                 #endif
+                layer_move(AZE_AFN_BASE);
             }
             return false;
 
-        case LAY_QWE:
+            case LAY_QWE:
             if (record->event.pressed) {
                 current_layout = LAYOUT_QWERTY;
                 user_config.layout = current_layout;
@@ -207,10 +209,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 #ifdef RGB_MATRIX_ENABLE
                 rgb_matrix_sethsv_noeeprom(120, 255, 255);  // Green for QWERTY
                 #endif
+                layer_move(QWE_BASE);
             }
             return false;
 
-        case LAY_BPO:
+            case LAY_BPO:
             if (record->event.pressed) {
                 current_layout = LAYOUT_BEPO;
                 user_config.layout = current_layout;
@@ -219,6 +222,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 #ifdef RGB_MATRIX_ENABLE
                 rgb_matrix_sethsv_noeeprom(240, 255, 255);  // Blue for BÉPO
                 #endif
+                layer_move(BEP_BASE);
             }
             return false;
 
