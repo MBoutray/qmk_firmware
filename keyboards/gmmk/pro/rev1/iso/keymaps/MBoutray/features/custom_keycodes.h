@@ -91,13 +91,54 @@ enum custom_keycodes {
     SMART_QUOTE,                // ""
     SMART_SQUOTE,               // ''
 
-    // RGB custom modes
-    RGB_REAC_WIDE,
-    RGB_REAC_MWIDE,
-    RGB_SPL,
-    RGB_MULT_SPL,
-    RGB_SOL_SPL,
-    RGB_SOL_MULT_SPL,
+    // RGB Matrix
+    RM_NONE,
+    RM_ALPHAS_MODS,
+    RM_GRAD_UP_DOWN,
+    RM_GRAD_LEFT_RIGHT,
+    RM_BREATHING,
+    RM_BAND_SAT,
+    RM_BAND_VAL,
+    RM_BAND_PINWHEEL_SAT,
+    RM_BAND_PINWHEEL_VAL,
+    RM_BAND_SPIRAL_SAT,
+    RM_BAND_SPIRAL_VAL,
+    RM_CYC_ALL,
+    RM_CYC_LEFT_RIGHT,
+    RM_CYC_UP_DOWN,
+    RM_RAINBOW_MOVING_CHEVRON,
+    RM_CYC_OUT_IN,
+    RM_CYC_OUT_IN_DUAL,
+    RM_CYC_PINWHEEL,
+    RM_CYC_SPIRAL,
+    RM_DUAL_BEACON,
+    RM_RAINBOW_BEACON,
+    RM_RAINBOW_PINWHEELS,
+    RM_RAINDROPS,
+    RM_JELLYBEAN_RAINDROPS,
+    RM_HUE_BREATHING,
+    RM_HUE_PENDULUM,
+    RM_HUE_WAVE,
+    RM_PIX_FRACTAL,
+    RM_PIX_FLOW,
+    RM_PIX_RAIN,
+    // Framebuffer defines (additional logic can increase firmware size)
+    RM_TYPING_HEATMAP,
+    RM_DIGITAL_RAIN,
+    // Reactive defines (additional logic can increase firmware size)
+    RM_SOLID_REACT_SIMPLE,
+    RM_SOLID_REACT,
+    RM_SOLID_REACT_WIDE,
+    RM_SOLID_REACT_MULTIWIDE,
+    RM_SOLID_REACT_CROSS,
+    RM_SOLID_REACT_MULTICROSS,
+    RM_SOLID_REACT_NEXUS,
+    RM_SOLID_REACT_MULTINEXUS,
+    RM_SPLASH,
+    RM_MULTISPLASH,
+    RM_SOLID_SPLASH,
+    RM_SOLID_MULTISPLASH,
+
 
     // Special functions
     CMD_TAB,                // Cmd-Tab for macOS
@@ -120,7 +161,8 @@ enum layers {
     NAVI,                   // Navigation layer
     SYMB,                   // Symbols layer
     GAME,                   // Gaming layer (no custom keys)
-    NUMP                    // Numpad layer
+    NUMP,                   // Numpad layer
+    RGB_MAT,                // RGB control layer
 };
 
 /* Layout types */
@@ -148,6 +190,7 @@ enum tap_dances {
 #define MO_SYST MO(SYST)
 #define MO_NAVI MO(NAVI)
 #define MO_SYMB MO(SYMB)
+#define MO_RGB  MO(RGB_MAT)
 
 /* Layer-tap shortcuts */
 #define LT_NAVI LT(NAVI, KC_CAPS)
@@ -159,6 +202,7 @@ enum tap_dances {
 #define TG_GAME TG(GAME)
 #define TG_NUMP TG(NUMP)
 #define TG_SYST TG(SYST)
+#define TG_RGB  TG(RGB_MAT)
 
 /* Turn on a layer, turn off the rest (except base) */
 #define TO_SYST TO(SYST)

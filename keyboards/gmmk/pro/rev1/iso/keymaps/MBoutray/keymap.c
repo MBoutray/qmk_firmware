@@ -143,22 +143,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LSFT, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,          KC_RSFT, KC_UP,   KC_PGDN,
         KC_LCTL, KC_LGUI, KC_LALT,                            KC_SPC,                             KC_RALT, KC_RGUI, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
     ),
-    // /* System Administration Layer */
-    // [_SYS] = LAYOUT(
-    //     QK_BOOT, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, EEP_RST,          _______,
-    //     _______, LAY_AZE, LAY_QWE, LAY_BPO, _______, _______, _______, _______, _______, _______, RGB_TOG, RGB_VAD, RGB_VAI, _______,          NK_TOGG,
-    //     _______, _______, _______, _______, _______, _______, _______, _______, RGB_HUI, RGB_SAI, RGB_SPI, RGB_MOD, RGB_RMOD,                  AS_TOGG,
-    //     _______, RGB_REAC_WIDE, RGB_REAC_MWIDE, RGB_SPL, RGB_MULT_SPL, RGB_SOL_SPL, RGB_SOL_MULT_SPL, _______, _______, _______, _______, _______, _______, _______,          TG_GAME,
-    //     _______, _______, ______
+    /* System Layer - System controls and utilities */
     [SYST] = LAYOUT(
         /* 1        2            3            4        5        6        7        8        9       10       11       12       13       14       15       16  */
         TG_SYST, QK_BOOT,     QK_MAKE,     DB_TOGG, QK_RBT,  EE_CLR,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
         XXXXXXX, LAY_AZE_STD, LAY_AZE_AFN, LAY_QWE, LAY_BPO, TO_GAME, TO_NUMP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,          XXXXXXX,
-        XXXXXXX, XXXXXXX,     XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX,
+        XXXXXXX, XXXXXXX,     XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   TG_SYST,
         XXXXXXX, XXXXXXX,     XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
         XXXXXXX, XXXXXXX,     XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX,
-        XXXXXXX, XXXXXXX,     XXXXXXX,                                XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+        XXXXXXX, MO_RGB,     XXXXXXX,                                XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     ),
+    /* RGB Layer */
+    [RGB_MAT] = LAYOUT(
+        /* 1        2                          3                          4                          5                   6                7                  8                     9                     10                    11                   12                        13                    14       15       16  */
+        RM_NONE, _______,                   _______,                   _______,                   _______,            _______,         _______,           _______,              _______,               _______,              _______,             _______,                  _______,              _______,          _______,
+        _______, RM_ALPHAS_MODS,            RM_GRAD_UP_DOWN,           RM_GRAD_LEFT_RIGHT,        RM_BREATHING,       RM_BAND_SAT,     RM_BAND_VAL,       RM_BAND_PINWHEEL_SAT, RM_BAND_PINWHEEL_VAL,  RM_BAND_SPIRAL_SAT,   RM_BAND_SPIRAL_VAL,  RM_CYC_ALL,               RM_CYC_LEFT_RIGHT,    _______,          _______,
+        _______, RM_CYC_UP_DOWN,            RM_RAINBOW_MOVING_CHEVRON, RM_CYC_OUT_IN,             RM_CYC_OUT_IN_DUAL, RM_CYC_PINWHEEL, RM_CYC_SPIRAL,     RM_DUAL_BEACON,       RM_RAINBOW_BEACON,     RM_RAINBOW_PINWHEELS, RM_RAINDROPS,        RM_JELLYBEAN_RAINDROPS,   RM_HUE_BREATHING,                       _______,
+        _______, RM_HUE_PENDULUM,           RM_HUE_WAVE,               RM_PIX_FRACTAL,            RM_PIX_FLOW,        RM_PIX_RAIN,     RM_TYPING_HEATMAP, RM_DIGITAL_RAIN,      RM_SOLID_REACT_SIMPLE, RM_SOLID_REACT,       RM_SOLID_REACT_WIDE, RM_SOLID_REACT_MULTIWIDE, RM_SOLID_REACT_CROSS, _______,          _______,
+        _______, RM_SOLID_REACT_MULTICROSS, RM_SOLID_REACT_NEXUS,      RM_SOLID_REACT_MULTINEXUS, RM_SPLASH,          RM_MULTISPLASH,  RM_SOLID_SPLASH,   RM_SOLID_MULTISPLASH, _______,               _______,              _______,             _______,                                        _______, _______, _______,
+        _______, _______,                   _______,                                                                                   _______,                                                                              _______,             _______,                  _______,              _______, _______, _______
+    )
 };
 
 /* Process custom keycodes */
@@ -280,40 +284,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
 
-        /* RGB custom modes */
-        case RGB_REAC_WIDE:
+        // /* RGB custom modes */
+        case RM_NONE:                  case RM_ALPHAS_MODS:       case RM_GRAD_UP_DOWN:           case RM_GRAD_LEFT_RIGHT:     case RM_BREATHING:
+        case RM_BAND_SAT:              case RM_BAND_VAL:          case RM_BAND_PINWHEEL_SAT:      case RM_BAND_PINWHEEL_VAL:   case RM_BAND_SPIRAL_SAT:
+        case RM_BAND_SPIRAL_VAL:       case RM_CYC_ALL:           case RM_CYC_LEFT_RIGHT:         case RM_CYC_UP_DOWN:         case RM_RAINBOW_MOVING_CHEVRON:
+        case RM_CYC_OUT_IN:            case RM_CYC_OUT_IN_DUAL:   case RM_CYC_PINWHEEL:           case RM_CYC_SPIRAL:          case RM_DUAL_BEACON:
+        case RM_RAINBOW_BEACON:        case RM_RAINBOW_PINWHEELS: case RM_RAINDROPS:              case RM_JELLYBEAN_RAINDROPS: case RM_HUE_BREATHING:
+        case RM_HUE_PENDULUM:          case RM_HUE_WAVE:          case RM_PIX_FRACTAL:            case RM_PIX_FLOW:            case RM_PIX_RAIN:
+        case RM_TYPING_HEATMAP:        case RM_DIGITAL_RAIN:      case RM_SOLID_REACT_SIMPLE:     case RM_SOLID_REACT:         case RM_SOLID_REACT_WIDE:
+        case RM_SOLID_REACT_MULTIWIDE: case RM_SOLID_REACT_CROSS: case RM_SOLID_REACT_MULTICROSS: case RM_SOLID_REACT_NEXUS:   case RM_SOLID_REACT_MULTINEXUS:
+        case RM_SPLASH:                case RM_MULTISPLASH:       case RM_SOLID_SPLASH:           case RM_SOLID_MULTISPLASH:
             if (record->event.pressed) {
-                rgb_matrix_mode(RGB_MATRIX_SOLID_REACTIVE_WIDE);
-            }
-            return false;
-
-        case RGB_REAC_MWIDE:
-            if (record->event.pressed) {
-                rgb_matrix_mode(RGB_MATRIX_SOLID_REACTIVE_MULTIWIDE);
-            }
-            return false;
-
-        case RGB_SPL:
-            if (record->event.pressed) {
-                rgb_matrix_mode(RGB_MATRIX_SPLASH);
-            }
-            return false;
-
-        case RGB_MULT_SPL:
-            if (record->event.pressed) {
-                rgb_matrix_mode(RGB_MATRIX_MULTISPLASH);
-            }
-            return false;
-
-        case RGB_SOL_SPL:
-            if (record->event.pressed) {
-                rgb_matrix_mode(RGB_MATRIX_SOLID_SPLASH);
-            }
-            return false;
-
-        case RGB_SOL_MULT_SPL:
-            if (record->event.pressed) {
-                rgb_matrix_mode(RGB_MATRIX_SOLID_MULTISPLASH);
+                rgb_matrix_process_record_user(keycode, record);
             }
             return false;
 
