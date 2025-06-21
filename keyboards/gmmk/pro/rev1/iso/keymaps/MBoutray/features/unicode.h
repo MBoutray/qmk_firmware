@@ -1,7 +1,6 @@
 #pragma once
 
 #include "quantum.h"
-// #include <stdint.h>
 
 enum unicode_names {
     UNICODE_AT, // @ (arrobase)
