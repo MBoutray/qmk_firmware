@@ -26,7 +26,8 @@ TAP_DANCE_ENABLE = yes        # Enable tap dance functionality
 LEADER_ENABLE = no            # Enable leader key functionality
 AUTO_SHIFT_ENABLE = yes       # Enable auto shift
 DYNAMIC_MACRO_ENABLE = no     # Enable dynamic macros
-UNICODEMAP_ENABLE = no        # Enable unicode support
+UNICODE_COMMON = no           # Enable common unicode characters
+UNICODEMAP_ENABLE = yes       # Enable unicode support
 KEY_OVERRIDE_ENABLE = no      # Enable key overrides
 COMBO_ENABLE = no             # Disable combos to save space
 
@@ -37,7 +38,11 @@ SPACE_CADET_ENABLE = no       # Disable space cadet to save space
 # Custom source files
 SRC += features/custom_keycodes.c
 SRC += features/vim_navigation.c
+SRC += features/unicode.c
+SRC += layout/azerty_afnor.c
+SRC += layout/bepo.c
+SRC += layout/qwerty.c
 
 # Include paths
 VPATH += keyboards/gmmk/pro/rev1/iso/keymaps/mboutray/features
-VPATH += keyboards/gmmk/pro/rev1/iso/keymaps/mboutray/layouts
+VPATH += keyboards/gmmk/pro/rev1/iso/keymaps/mboutray/layout

@@ -6,8 +6,8 @@
 #include QMK_KEYBOARD_H
 #include "eeconfig.h"
 #include "leader.h"
-#include "features/custom_keycodes.h"
-#include "features/vim_navigation.h"
+#include "features/index.h"
+#include "layout/index.h"
 
 /* Current layout tracking */
 static uint8_t current_layout = LAYOUT_AZERTY_STANDARD;
@@ -29,100 +29,6 @@ typedef union {
 } user_config_t;
 
 user_config_t user_config;
-
-/* Afnor layout config */
-typedef struct {
-    uint16_t base;
-    uint16_t shift;
-    uint16_t altgr;
-    uint16_t shift_altgr;
-} afnor_keycode_mapping_t;
-
-static const afnor_keycode_mapping_t PROGMEM afnor_mappings[] = {
-    { AF_AT,   AF_HASH, AF_BREV, AF_IBRV },
-    { AF_AGRV, AF_1,    AF_SECT, AF_AGRV_CAPS },
-    { AF_EACU, AF_2,    AF_ACUT, AF_EACU_CAPS },
-    { AF_EGRV, AF_3,    AF_GRV,  AF_EGRV_CAPS },
-    { AF_ECIR, AF_4,    AF_AMPR, AF_ECIR_CAPS },
-    { AF_LPRN, AF_5,    AF_LBRC, AF_DACU },
-    { AF_RPRN, AF_6,    AF_RBRC, AF_DGRV },
-    { AF_LSQU, AF_7,    AF_MACR, XXXXXXX },
-    { AF_RSQU, AF_8,    AF_UNDS, AF_MDSH },
-    { AF_LDAQ, AF_9,    AF_LDQU, AF_LSAQ },
-    { AF_RDAQ, AF_0,    AF_RDQU, AF_RSAQ },
-    { AF_QUOT, AF_DQUO, AF_DEG,  AF_RNGA },
-    { AF_CIRC, AF_DIAE, AF_CARN, XXXXXXX },
-    { AF_A,    AF_A,    AF_AE,   AF_AE_CAPS },
-    { AF_Z,    AF_Z,    AF_PND,  XXXXXXX },
-    { AF_E,    AF_E,    AF_EURO, XXXXXXX },
-    { AF_R,    AF_R,    AF_REGD, XXXXXXX },
-    { AF_T,    AF_T,    AF_LCBR, AF_TM   },
-    { AF_Y,    AF_Y,    AF_RCBR, XXXXXXX },
-    { AF_U,    AF_U,    AF_UGRV, AF_UGRV_CAPS },
-    { AF_I,    AF_I,    AF_DOTA, AF_DOTB },
-    { AF_O,    AF_O,    AF_OE,   AF_OE_CAPS },
-    { AF_P,    AF_P,    AF_PERC, AF_PERM },
-    { AF_MINS, AF_NDSH, AF_MMNS, AF_NBHY },
-    { AF_PLUS, AF_PLMN, AF_DAGG, AF_DDAG },
-    { AF_Q,    AF_Q,    AF_THET, XXXXXXX },
-    { AF_S,    AF_S,    AF_SS,   AF_SS_CAPS },
-    { AF_D,    AF_D,    AF_DLR,  XXXXXXX },
-    { AF_F,    AF_F,    AF_CURR, XXXXXXX },
-    { AF_G,    AF_G,    AF_DGRK, XXXXXXX },
-    { AF_H,    AF_H,    AF_EU,   AF_MACB },
-    { AF_J,    AF_J,    XXXXXXX, XXXXXXX },
-    { AF_K,    AF_K,    AF_DSLS, XXXXXXX },
-    { AF_L,    AF_L,    AF_PIPE, XXXXXXX },
-    { AF_M,    AF_M,    AF_INFN, XXXXXXX },
-    { AF_SLSH, AF_BSLS, AF_DIV,  AF_SQRT },
-    { AF_ASTR, AF_HALF, AF_MUL,  AF_QRTR },
-    { AF_LABK, AF_RABK, AF_LEQL, AF_GEQL },
-    { AF_W,    AF_W,    AF_EZH,  AF_EZH_CAPS },
-    { AF_X,    AF_X,    AF_COPY, XXXXXXX },
-    { AF_C,    AF_C,    AF_CCED, AF_CCED_CAPS },
-    { AF_V,    AF_V,    AF_CEDL, AF_OGON },
-    { AF_B,    AF_B,    AF_DMNS, XXXXXXX },
-    { AF_N,    AF_N,    AF_DTIL, XXXXXXX },
-    { AF_DOT,  AF_QUES, AF_IQUE, XXXXXXX },
-    { AF_COMM, AF_EXLM, AF_IEXL, AF_DCMM },
-    { AF_COLN, AF_ELLP, AF_MDDT, XXXXXXX },
-    { AF_SCLN, AF_EQL,  AF_AEQL, AF_NEQL }
-};
-
-bool process_afnor_keycodes(uint16_t keycode, keyrecord_t *record) {
-    if (!record->event.pressed) return true;
-
-    bool shift = get_mods() & MOD_MASK_SHIFT;
-    bool altgr = get_mods() & MOD_BIT(KC_RALT);
-
-    if (shift && altgr) {
-        for (int i = 0; i < ARRAY_SIZE(afnor_mappings); i++) {
-            if (keycode == afnor_mappings[i].base) {
-                tap_code16(afnor_mappings[i].shift_altgr);
-                return false;
-            }
-        }
-        return true;
-    } else if (shift) {
-        for (int i = 0; i < ARRAY_SIZE(afnor_mappings); i++) {
-            if (keycode == afnor_mappings[i].base) {
-                tap_code16(afnor_mappings[i].shift);
-                return false;
-            }
-        }
-        return true;
-    } else if (altgr) {
-        for (int i = 0; i < ARRAY_SIZE(afnor_mappings); i++) {
-            if (keycode == afnor_mappings[i].base) {
-                tap_code16(afnor_mappings[i].altgr);
-                return false;
-            }
-        }
-        return true;
-    } else {
-        return true;
-    }
-}
 
 /* Initialize keyboard */
 void keyboard_post_init_user(void) {
@@ -249,13 +155,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //     _______, RGB_REAC_WIDE, RGB_REAC_MWIDE, RGB_SPL, RGB_MULT_SPL, RGB_SOL_SPL, RGB_SOL_MULT_SPL, _______, _______, _______, _______, _______, _______, _______,          TG_GAME,
     //     _______, _______, ______
     [SYST] = LAYOUT(
-        /* 1        2        3        4        5        6        7        8        9       10       11       12       13       14       15       16  */
-        TG_SYST, QK_BOOT, QK_MAKE, DB_TOGG, QK_RBT,  EE_CLR,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
-        XXXXXXX, LAY_AZE_STD, LAY_QWE, LAY_BPO, XXXXXXX, TO_GAME, TO_NUMP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,          XXXXXXX,
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX,
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX,
-        XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+        /* 1        2            3            4        5        6        7        8        9       10       11       12       13       14       15       16  */
+        TG_SYST, QK_BOOT,     QK_MAKE,     DB_TOGG, QK_RBT,  EE_CLR,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
+        XXXXXXX, LAY_AZE_STD, LAY_AZE_AFN, LAY_QWE, LAY_BPO, TO_GAME, TO_NUMP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,          XXXXXXX,
+        XXXXXXX, XXXXXXX,     XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX,
+        XXXXXXX, XXXXXXX,     XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
+        XXXXXXX, XXXXXXX,     XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX,     XXXXXXX,                                XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     ),
 };
 
@@ -281,6 +187,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 current_layout = LAYOUT_AZERTY_STANDARD;
                 user_config.layout = current_layout;
                 eeconfig_update_kb(user_config.raw);
+                set_single_persistent_default_layer(AZE_STD_BASE);
                 #ifdef RGB_MATRIX_ENABLE
                 rgb_matrix_sethsv_noeeprom(0, 255, 255);    // Red for AZERTY standard
                 #endif
@@ -292,6 +199,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 current_layout = LAYOUT_AZERTY_AFNOR;
                 user_config.layout = current_layout;
                 eeconfig_update_kb(user_config.raw);
+                set_single_persistent_default_layer(AZE_AFN_BASE);
                 #ifdef RGB_MATRIX_ENABLE
                 rgb_matrix_sethsv_noeeprom(21, 255, 192);    // Orange for AZERTY Afnor
                 #endif
@@ -303,6 +211,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 current_layout = LAYOUT_QWERTY;
                 user_config.layout = current_layout;
                 eeconfig_update_kb(user_config.raw);
+                set_single_persistent_default_layer(QWE_BASE);
                 #ifdef RGB_MATRIX_ENABLE
                 rgb_matrix_sethsv_noeeprom(120, 255, 255);  // Green for QWERTY
                 #endif
@@ -314,6 +223,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 current_layout = LAYOUT_BEPO;
                 user_config.layout = current_layout;
                 eeconfig_update_kb(user_config.raw);
+                set_single_persistent_default_layer(BEP_BASE);
                 #ifdef RGB_MATRIX_ENABLE
                 rgb_matrix_sethsv_noeeprom(240, 255, 255);  // Blue for BÉPO
                 #endif

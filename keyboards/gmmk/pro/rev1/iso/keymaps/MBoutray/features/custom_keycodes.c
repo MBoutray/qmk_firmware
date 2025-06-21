@@ -1,9 +1,7 @@
 /* Copyright 2024 MBoutray
  * Custom keycode implementations for advanced features
  */
-#include QMK_KEYBOARD_H
 #include "custom_keycodes.h"
-#include "quantum.h"
 
 extern bool sym_one_shot;
 
