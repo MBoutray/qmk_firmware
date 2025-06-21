@@ -100,7 +100,6 @@ enum custom_keycodes {
     RGB_SOL_MULT_SPL,
 
     // Special functions
-    ALT_TAB,                // Alt-Tab functionality
     CMD_TAB,                // Cmd-Tab for macOS
     CLIPBOARD_COPY,         // Cross-platform copy
     CLIPBOARD_PASTE,        // Cross-platform paste

@@ -12,10 +12,6 @@
 /* Current layout tracking */
 static uint8_t current_layout = LAYOUT_AZERTY_STANDARD;
 
-/* Alt-Tab tracking */
-static bool is_alt_tab_active = false;
-static uint16_t alt_tab_timer;
-
 /* Tap dance state */
 bool sym_one_shot = false;
 
@@ -172,14 +168,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     }
 
-    // Alt-Tab handling
-    if (is_alt_tab_active) {
-        if (timer_elapsed(alt_tab_timer) > 1000) {
-            unregister_code(KC_LALT);
-            is_alt_tab_active = false;
-        }
-    }
-
     switch (keycode) {
         /* Layout switching */
         case LAY_AZE_STD:
@@ -326,18 +314,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case RGB_SOL_MULT_SPL:
             if (record->event.pressed) {
                 rgb_matrix_mode(RGB_MATRIX_SOLID_MULTISPLASH);
-            }
-            return false;
-
-        /* Alt-Tab functionality */
-        case ALT_TAB:
-            if (record->event.pressed) {
-                if (!is_alt_tab_active) {
-                    is_alt_tab_active = true;
-                    register_code(KC_LALT);
-                }
-                alt_tab_timer = timer_read();
-                tap_code16(KC_TAB);
             }
             return false;
 
