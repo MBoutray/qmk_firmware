@@ -46,7 +46,6 @@
 
 /* Encoder Configuration */
 #define ENCODER_RESOLUTION 4
-#define ENCODER_DIRECTION_FLIP
 
 /* Power Saving */
 #define USB_SUSPEND_WAKEUP_DELAY 1000
