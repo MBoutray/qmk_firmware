@@ -27,9 +27,6 @@
 /* Unicode input configuration */
 #define UNICODE_KEY_WINC KC_RIGHT_ALT
 
-/* Tap Dance Configuration */
-#define TAPPING_TERM 200
-
 /* Dynamic Macro Configuration */
 #define DYNAMIC_MACRO_SIZE 128
 

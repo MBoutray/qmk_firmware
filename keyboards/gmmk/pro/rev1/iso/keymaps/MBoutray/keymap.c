@@ -12,9 +12,6 @@
 /* Current layout tracking */
 static uint8_t current_layout = LAYOUT_AZERTY_STANDARD;
 
-/* Tap dance state */
-bool sym_one_shot = false;
-
 /* EEPROM layout storage */
 typedef union {
     uint32_t raw;
@@ -61,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  FR_A,    FR_Z,    FR_E,    FR_R,    FR_T,    FR_Y,    FR_U,    FR_I,    FR_O,    FR_P,    FR_CIRC, FR_DLR,                    KC_INS,
         LT_NAVI, FR_Q,    FR_S,    FR_D,    FR_F,    FR_G,    FR_H,    FR_J,    FR_K,    FR_L,    FR_M,    FR_UGRV, FR_ASTR, KC_ENT,           KC_PGUP,
         KC_LSFT, FR_LABK, FR_W,    FR_X,    FR_C,    FR_V,    FR_B,    FR_N,    FR_COMM, FR_SCLN, FR_COLN, FR_EXLM, KC_RSFT,          KC_UP,   KC_PGDN,
-        KC_LCTL, MO_FUNC, KC_LALT,                            KC_SPC,                             KC_RALT, TD_RGUI, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
+        KC_LCTL, MO_FUNC, KC_LALT,                            KC_SPC,                             KC_RALT, KC_RGUI, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
     ),
     /* AZERTY Afnor base layer*/
     [AZE_AFN_BASE] = LAYOUT(
@@ -71,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  AF_A,    AF_Z,    AF_E,    AF_R,    AF_T,    AF_Y,    AF_U,    AF_I,    AF_O,    AF_P,    AF_MINS, AF_PLUS,                   KC_INS,
         LT_NAVI, AF_Q,    AF_S,    AF_D,    AF_F,    AF_G,    AF_H,    AF_J,    AF_K,    AF_L,    AF_M,    AF_SLSH, AF_ASTR, KC_ENT,           KC_PGUP,
         KC_LSFT, AF_LABK, AF_W,    AF_X,    AF_C,    AF_V,    AF_B,    AF_N,    AF_DOT,  AF_COMM, AF_COLN, AF_SCLN, KC_RSFT,          KC_UP,   KC_PGDN,
-        KC_LCTL, MO_FUNC, KC_LALT,                            KC_SPC,                             KC_RALT, TD_RGUI, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
+        KC_LCTL, MO_FUNC, KC_LALT,                            KC_SPC,                             KC_RALT, KC_RGUI, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
     ),
     /* QWERTY base layer*/
     [QWE_BASE] = LAYOUT(
@@ -81,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,                   KC_INS,
         LT_NAVI, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_NUHS, KC_ENT,           KC_PGUP,
         KC_LSFT, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,          KC_UP,   KC_PGDN,
-        KC_LCTL, MO_FUNC, KC_LALT,                            KC_SPC,                             KC_RALT, TD_RGUI, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
+        KC_LCTL, MO_FUNC, KC_LALT,                            KC_SPC,                             KC_RALT, KC_RGUI, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
     ),
     /* BEPO base layer*/
     [BEP_BASE] = LAYOUT(
@@ -91,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,                   KC_INS,
         LT_NAVI, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_NUHS, KC_ENT,           KC_PGUP,
         KC_LSFT, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,          KC_UP,   KC_PGDN,
-        KC_LCTL, MO_FUNC, KC_LALT,                            KC_SPC,                             KC_RALT, TD_RGUI, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
+        KC_LCTL, MO_FUNC, KC_LALT,                            KC_SPC,                             KC_RALT, KC_RGUI, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
     ),
     /* Function layer */
     [FUNC] = LAYOUT(
@@ -151,7 +148,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXXXXX, XXXXXXX,     XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   TG_SYST,
         XXXXXXX, XXXXXXX,     XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
         XXXXXXX, XXXXXXX,     XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX,
-        XXXXXXX, MO_RGB,     XXXXXXX,                                XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+        XXXXXXX, MO_RGB,      XXXXXXX,                                XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     ),
     /* RGB Layer */
     [RGB_MAT] = LAYOUT(
@@ -322,10 +319,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
 
-        /* Tad dance */
-        case TD(TD_RGUI_SYM):
-            break;  // Handled in tap dance function
-
         default:
             // Reset one-shot symbol layer if necessary
             if(sym_one_shot && record->event.pressed && keycode != TD(TD_RGUI_SYM)) {
@@ -376,11 +369,6 @@ void matrix_scan_user(void) {
     // This would be where we'd implement dynamic key remapping
     // based on current_layout if needed
 }
-
-/* Actions definitions */
-tap_dance_action_t tap_dance_actions[] = {
-    [TD_RGUI_SYM] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_rgui_sym_finished, dance_rgui_sym_reset),
-};
 
 /* Layer state handling */
 layer_state_t layer_state_set_user(layer_state_t state) {

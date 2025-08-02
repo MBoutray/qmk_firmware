@@ -2,10 +2,6 @@
 
 #include "quantum.h"
 
-/* Tap dance actions */
-void dance_rgui_sym_finished(tap_dance_state_t *state, void *user_data);
-void dance_rgui_sym_reset(tap_dance_state_t *state, void *user_data);
-
 /* Per-key tapping term */
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record);
 
@@ -171,11 +167,6 @@ enum layout_types {
     LAYOUT_COUNT
 };
 
-/* Tap Dance declarations */
-enum tap_dances {
-    TD_RGUI_SYM = 0,            // Right GUI / Symbols layer
-};
-
 /* Helper macros for cleaner keymap */
 #define NAV_H VIM_H
 #define NAV_J VIM_J
@@ -191,9 +182,6 @@ enum tap_dances {
 
 /* Layer-tap shortcuts */
 #define LT_NAVI LT(NAVI, KC_CAPS)
-
-/* Tap dance */
-#define TD_RGUI TD(TD_RGUI_SYM)
 
 /* Layer toggle shortcuts */
 #define TG_GAME TG(GAME)
