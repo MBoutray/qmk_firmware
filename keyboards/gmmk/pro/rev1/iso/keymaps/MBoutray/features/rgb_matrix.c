@@ -226,4 +226,39 @@ bool rgb_matrix_process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
 }
+
+// bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+//     // mettre les mods de la couleur de la layer active
+//     // surligner zqsd sur la layer game
+//     // surligner les touches de navigation sur la layer nav
+//     // surligner les touches de la layer func
+//     // surligner les touches de la layer sys
+//     // surligner les touches de la layer nump
+//     if (host_keyboard_led_state().caps_lock) {
+//         for (uint8_t i = led_min; i < led_max; i++) {
+//             if (g_led_config.flags[i] & LED_FLAG_KEYLIGHT) {
+//                 rgb_matrix_set_color(i, RGB_RED);
+//             }
+//         }
+//     }
+//     return false;
+// }
+
+// led_config_t g_led_config = { {
+//     // Key Matrix to LED Index
+//     {1, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, 2},
+//     {20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3},
+//     {21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, NO_LED, 36, 37},
+//     {52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 41, 40, NO_LED, NO_LED, 39, 38},
+//     {53, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED},
+//     {NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED},
+//     {NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED},
+//     {NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED},
+//   }, {
+//     // LED Index to Physical Position
+//     { 188,  16 }, { 187,  48 }, { 149,  64 }, { 112,  64 }, {  37,  48 }, {  38,  16 }
+//   }, {
+//     // LED Index to Flag
+//     1, 4, 4, 4, 4, 1
+//   } };
 #endif
