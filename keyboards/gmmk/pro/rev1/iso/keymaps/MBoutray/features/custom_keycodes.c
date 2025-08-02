@@ -18,21 +18,6 @@ void dance_rgui_sym_reset(tap_dance_state_t *state, void *user_data) {
 
 }
 
-/* Auto Shift configuration */
-bool get_auto_shift_state(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        // Disable auto shift for these keys
-        case KC_SPC:
-        case KC_ENT:
-        case KC_TAB:
-        case KC_BSPC:
-        case KC_DEL:
-            return false;
-        default:
-            return true;
-    }
-}
-
 /* Per-key tapping term */
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {

@@ -27,11 +27,6 @@
 /* Unicode input configuration */
 #define UNICODE_KEY_WINC KC_RIGHT_ALT
 
-/* Auto Shift Configuration */
-#define AUTO_SHIFT_TIMEOUT 175
-#define NO_AUTO_SHIFT_NUMERIC
-#define NO_AUTO_SHIFT_SPECIAL
-
 /* Tap Dance Configuration */
 #define TAPPING_TERM 200
 
