@@ -48,11 +48,7 @@
 #define DISABLE_LEADER  // Enable only if using leader key feature
 
 /* Custom Feature Flags */
-#define VIM_NAVIGATION_ENABLE
 #define AZERTY_AFNOR_ENABLE
-#define QWERTY_ENABLE
-#define BEPO_ENABLE
-#define SMART_BRACKETS_ENABLE
 
 /* RGB Matrix Configuration */
 #ifdef RGB_MATRIX_ENABLE

@@ -7,8 +7,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case MT(MOD_LCTL, KC_ESC):
             return 100;  // Faster response for Ctrl/Esc
-        case LT(NAVI, KC_CAPS):
-            return 150;  // Slightly faster for nav layer
         default:
             return TAPPING_TERM;
     }

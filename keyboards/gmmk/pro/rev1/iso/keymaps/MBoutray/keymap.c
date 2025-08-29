@@ -9,8 +9,7 @@
 #include "features/index.h"
 #include "layout/index.h"
 
-/* Current layout tracking */
-static uint8_t current_layout = LAYOUT_AZERTY_STANDARD;
+static uint8_t current_layout = BASE;
 
 /* EEPROM layout storage */
 typedef union {
@@ -32,17 +31,8 @@ void keyboard_post_init_user(void) {
     // Set initial RGB mode based on layout
     #ifdef RGB_MATRIX_ENABLE
     switch (current_layout) {
-        case LAYOUT_AZERTY_STANDARD:
-            rgb_matrix_sethsv_noeeprom(0, 255, 255);    // Red for AZERTY standard
-            break;
-        case LAYOUT_AZERTY_AFNOR:
-            rgb_matrix_sethsv_noeeprom(21, 255, 192);   // Orange for AZERTY Afnor
-            break;
-        case LAYOUT_QWERTY:
+        case BASE:
             rgb_matrix_sethsv_noeeprom(120, 255, 255);  // Green for QWERTY
-            break;
-        case LAYOUT_BEPO:
-            rgb_matrix_sethsv_noeeprom(240, 255, 255);  // Blue for BÉPO
             break;
     }
     #endif
@@ -50,43 +40,12 @@ void keyboard_post_init_user(void) {
 
 /* Main keymap */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    /* AZERTY standard base layer*/
-    [AZE_STD_BASE] = LAYOUT(
-        /* 1       2        3        4        5        6        7        8        9        10       11       12       13       14       15       16  */
-        KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,           KC_MUTE,
-        FR_SUP2, FR_AMPR, FR_EACU, FR_DQUO, FR_QUOT, FR_LPRN, FR_MINS, FR_EGRV, FR_UNDS, FR_CCED, FR_AGRV, FR_RPRN, FR_EQL,  KC_BSPC,          KC_PSCR,
-        KC_TAB,  FR_A,    FR_Z,    FR_E,    FR_R,    FR_T,    FR_Y,    FR_U,    FR_I,    FR_O,    FR_P,    FR_CIRC, FR_DLR,                    KC_INS,
-        LT_NAVI, FR_Q,    FR_S,    FR_D,    FR_F,    FR_G,    FR_H,    FR_J,    FR_K,    FR_L,    FR_M,    FR_UGRV, FR_ASTR, KC_ENT,           KC_PGUP,
-        KC_LSFT, FR_LABK, FR_W,    FR_X,    FR_C,    FR_V,    FR_B,    FR_N,    FR_COMM, FR_SCLN, FR_COLN, FR_EXLM, KC_RSFT,          KC_UP,   KC_PGDN,
-        KC_LCTL, MO_FUNC, KC_LALT,                            KC_SPC,                             KC_RALT, KC_RGUI, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
-    ),
-    /* AZERTY Afnor base layer*/
-    [AZE_AFN_BASE] = LAYOUT(
-        /* 1       2        3        4        5        6        7        8        9        10       11       12       13       14       15       16  */
-        KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,           KC_MUTE,
-        AF_AT,   AF_AGRV, AF_EACU, AF_EGRV, AF_ECIR, AF_LPRN, AF_RPRN, AF_LSQU, AF_RSQU, AF_LDAQ, AF_RDAQ, AF_QUOT, AF_CIRC, KC_BSPC,          KC_PSCR,
-        KC_TAB,  AF_A,    AF_Z,    AF_E,    AF_R,    AF_T,    AF_Y,    AF_U,    AF_I,    AF_O,    AF_P,    AF_MINS, AF_PLUS,                   KC_INS,
-        LT_NAVI, AF_Q,    AF_S,    AF_D,    AF_F,    AF_G,    AF_H,    AF_J,    AF_K,    AF_L,    AF_M,    AF_SLSH, AF_ASTR, KC_ENT,           KC_PGUP,
-        KC_LSFT, AF_LABK, AF_W,    AF_X,    AF_C,    AF_V,    AF_B,    AF_N,    AF_DOT,  AF_COMM, AF_COLN, AF_SCLN, KC_RSFT,          KC_UP,   KC_PGDN,
-        KC_LCTL, MO_FUNC, KC_LALT,                            KC_SPC,                             KC_RALT, KC_RGUI, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
-    ),
-    /* QWERTY base layer*/
-    [QWE_BASE] = LAYOUT(
+    [BASE] = LAYOUT(
         /* 1       2        3        4        5        6        7        8        9        10       11       12       13       14       15       16  */
         KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,           KC_MUTE,
         KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,          KC_PSCR,
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,                   KC_INS,
-        LT_NAVI, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_NUHS, KC_ENT,           KC_PGUP,
-        KC_LSFT, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,          KC_UP,   KC_PGDN,
-        KC_LCTL, MO_FUNC, KC_LALT,                            KC_SPC,                             KC_RALT, KC_RGUI, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
-    ),
-    /* BEPO base layer*/
-    [BEP_BASE] = LAYOUT(
-        /* 1       2        3        4        5        6        7        8        9        10       11       12       13       14       15       16  */
-        KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,           KC_MUTE,
-        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,          KC_PSCR,
-        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,                   KC_INS,
-        LT_NAVI, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_NUHS, KC_ENT,           KC_PGUP,
+        KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_NUHS, KC_ENT,           KC_PGUP,
         KC_LSFT, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,          KC_UP,   KC_PGDN,
         KC_LCTL, MO_FUNC, KC_LALT,                            KC_SPC,                             KC_RALT, KC_RGUI, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
     ),
@@ -100,26 +59,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, KC_END,
         _______, _______, _______,                            _______,                            _______, _______, _______, _______, _______, _______
     ),
-    /* Navigation layer - VIM-like cursor movement */
-    [NAVI] = LAYOUT(
-        /* 1        2        3        4        5        6        7        8        9       10       11       12       13       14       15       16  */
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
-        _______, _______, VIM_W,   VIM_E,   _______, _______, _______, _______, _______, _______, _______, _______, _______,                   _______,
-        _______, _______, _______, _______, _______, VIM_GG,  VIM_H,   VIM_J,   VIM_K,   VIM_L,   VIM_0,   VIM_DLR, _______, _______,          _______,
-        _______, _______, _______, _______, _______, _______, VIM_B,   _______, _______, _______, _______, _______, _______,          _______, _______,
-        _______, _______, _______,                            _______,                            _______, _______, _______, _______, _______, _______
-    ),
-    /* Symbols Layer - Programming & French Accents */
-    [SYMB] = LAYOUT(
-        /* 1        2           3        4        5        6        7        8        9       10           11       12             13           14       15       16  */
-        _______, _______,    _______, _______, _______, _______, _______, _______, _______, _______,     _______, _______,       _______,     _______,          _______,
-        _______, _______,    _______, _______, _______, _______, _______, _______, _______, _______,     _______, _______,       _______,     _______,          _______,
-        _______, _______,    _______, _______, FR_EACU, _______, _______, _______, _______, _______,     _______, SMART_BRACKET, SMART_BRACE,                   _______,
-        _______, _______,    _______, FR_EGRV, _______, _______, _______, _______, _______, _______,     _______, SMART_QUOTE,   _______,     _______,          _______,
-        _______, _______,    _______, _______, _______, _______, _______, _______, _______, SMART_ANGLE, _______, _______,       _______,              _______, _______,
-        _______, _______,    _______,                            _______,                                _______, _______,       _______,     _______, _______, _______
-    ),
     /* Numpad Layer */
     [NUMP] = LAYOUT(
         /* 1        2        3        4        5        6        7        8        9       10       11       12       13       14       15       16  */
@@ -130,25 +69,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______, _______, _______, KC_P0,   KC_P0,   KC_PDOT, KC_PPLS, _______, _______,          _______, _______,
         _______, _______, _______,                            _______,                            _______, _______, _______, _______, _______, _______
     ),
-    /* Gaming Layer - No custom keys */
-    [GAME] = LAYOUT(
-        /* 1        2        3        4        5        6        7        8        9       10       11       12       13       14       15       16  */
-        KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,           KC_MUTE,
-        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,          KC_INS,
-        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,                   TG_GAME,
-        KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_NUHS, KC_ENT,           KC_PGUP,
-        KC_LSFT, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,          KC_UP,   KC_PGDN,
-        KC_LCTL, KC_LGUI, KC_LALT,                            KC_SPC,                             KC_RALT, KC_RGUI, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
-    ),
     /* System Layer - System controls and utilities */
     [SYST] = LAYOUT(
-        /* 1        2            3            4        5        6        7        8        9       10       11       12       13       14       15       16  */
-        TG_SYST, QK_BOOT,     QK_MAKE,     DB_TOGG, QK_RBT,  EE_CLR,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
-        XXXXXXX, LAY_AZE_STD, LAY_AZE_AFN, LAY_QWE, LAY_BPO, TO_GAME, TO_NUMP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,          XXXXXXX,
-        XXXXXXX, XXXXXXX,     XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   TG_SYST,
-        XXXXXXX, XXXXXXX,     XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
-        XXXXXXX, XXXXXXX,     XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX,
-        XXXXXXX, MO_RGB,      XXXXXXX,                                XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+        /* 1        2        3        4        5        6        7        8        9       10       11       12       13       14       15       16  */
+        TG_SYST, QK_BOOT, QK_MAKE, DB_TOGG, QK_RBT,  EE_CLR,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
+        XXXXXXX, TO_NUMP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,          XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   TG_SYST,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX,
+        XXXXXXX, MO_RGB,  XXXXXXX,                            XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     ),
     /* RGB Layer */
     [RGB_MAT] = LAYOUT(
@@ -164,124 +93,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Process custom keycodes */
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    // Process vim navigation first
-    if (!process_vim_navigation(keycode, record)) {
-        return false;
-    }
-
     switch (keycode) {
         /* Layout switching */
-        case LAY_AZE_STD:
+        case BASE:
             if (record->event.pressed) {
-                current_layout = LAYOUT_AZERTY_STANDARD;
+                current_layout = BASE;
                 user_config.layout = current_layout;
                 eeconfig_update_kb(user_config.raw);
-                set_single_persistent_default_layer(AZE_STD_BASE);
                 #ifdef RGB_MATRIX_ENABLE
                 rgb_matrix_sethsv_noeeprom(0, 255, 255);    // Red for AZERTY standard
                 #endif
-                layer_move(AZE_STD_BASE);
-            }
-            return false;
-
-            case LAY_AZE_AFN:
-            if (record->event.pressed) {
-                current_layout = LAYOUT_AZERTY_AFNOR;
-                user_config.layout = current_layout;
-                eeconfig_update_kb(user_config.raw);
-                set_single_persistent_default_layer(AZE_AFN_BASE);
-                #ifdef RGB_MATRIX_ENABLE
-                rgb_matrix_sethsv_noeeprom(21, 255, 192);    // Orange for AZERTY Afnor
-                #endif
-                layer_move(AZE_AFN_BASE);
-            }
-            return false;
-
-            case LAY_QWE:
-            if (record->event.pressed) {
-                current_layout = LAYOUT_QWERTY;
-                user_config.layout = current_layout;
-                eeconfig_update_kb(user_config.raw);
-                set_single_persistent_default_layer(QWE_BASE);
-                #ifdef RGB_MATRIX_ENABLE
-                rgb_matrix_sethsv_noeeprom(120, 255, 255);  // Green for QWERTY
-                #endif
-                layer_move(QWE_BASE);
-            }
-            return false;
-
-            case LAY_BPO:
-            if (record->event.pressed) {
-                current_layout = LAYOUT_BEPO;
-                user_config.layout = current_layout;
-                eeconfig_update_kb(user_config.raw);
-                set_single_persistent_default_layer(BEP_BASE);
-                #ifdef RGB_MATRIX_ENABLE
-                rgb_matrix_sethsv_noeeprom(240, 255, 255);  // Blue for BÉPO
-                #endif
-                layer_move(BEP_BASE);
-            }
-            return false;
-
-        /* Custom keycodes for Afnor specific characters */
-        case AF_AT:   case AF_AGRV: case AF_EACU: case AF_EGRV: case AF_ECIR:
-        case AF_LPRN: case AF_RPRN: case AF_LSQU: case AF_RSQU: case AF_LDAQ:
-        case AF_RDAQ: case AF_QUOT: case AF_CIRC: case AF_A:    case AF_Z:
-        case AF_E:    case AF_R:    case AF_T:    case AF_Y:    case AF_U:
-        case AF_I:    case AF_O:    case AF_P:    case AF_MINS: case AF_PLUS:
-        case AF_Q:    case AF_S:    case AF_D:    case AF_F:    case AF_G:
-        case AF_H:    case AF_J:    case AF_K:    case AF_L:    case AF_M:
-        case AF_SLSH: case AF_ASTR: case AF_LABK: case AF_W:    case AF_X:
-        case AF_C:    case AF_V:    case AF_B:    case AF_N:    case AF_DOT:
-        case AF_COMM: case AF_COLN: case AF_SCLN:
-            return process_afnor_keycodes(keycode, record);
-
-        /* Smart brackets */
-        case SMART_PAREN:
-            if (record->event.pressed) {
-                tap_code16(KC_LPRN);
-                tap_code16(KC_RPRN);
-                tap_code(KC_LEFT);
-            }
-            return false;
-
-        case SMART_BRACKET:
-            if (record->event.pressed) {
-                tap_code16(KC_LBRC);
-                tap_code16(KC_RBRC);
-                tap_code(KC_LEFT);
-            }
-            return false;
-
-        case SMART_BRACE:
-            if (record->event.pressed) {
-                tap_code16(KC_LCBR);
-                tap_code16(KC_RCBR);
-                tap_code(KC_LEFT);
-            }
-            return false;
-
-        case SMART_ANGLE:
-            if (record->event.pressed) {
-                tap_code16(KC_LT);
-                tap_code16(KC_GT);
-                tap_code(KC_LEFT);
-            }
-            return false;
-
-        case SMART_QUOTE:
-            if (record->event.pressed) {
-                tap_code16(KC_DQUO);
-                tap_code16(KC_DQUO);
-                tap_code(KC_LEFT);
-            }
-            return false;
-
-        case SMART_SQUOTE:
-            if (record->event.pressed) {
-                tap_code16(KC_DQUO);
-                tap_code16(KC_DQUO);
-                tap_code(KC_LEFT);
             }
             return false;
 
@@ -300,31 +121,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
 
-        /* Cross-platform clipboard */
-        case CLIPBOARD_COPY:
-            if (record->event.pressed) {
-                tap_code16(LCTL(KC_C));
-            }
-            return false;
-
-        case CLIPBOARD_PASTE:
-            if (record->event.pressed) {
-                tap_code16(LCTL(KC_V));
-            }
-            return false;
-
-        case CLIPBOARD_CUT:
-            if (record->event.pressed) {
-                tap_code16(LCTL(KC_X));
-            }
-            return false;
-
         default:
-            // Reset one-shot symbol layer if necessary
-            if(sym_one_shot && record->event.pressed && keycode != TD(TD_RGUI_SYM)) {
-                layer_off(SYMB);
-                sym_one_shot = false;
-            }
     }
 
     return true;
@@ -380,15 +177,6 @@ layer_state_t layer_state_set_user(layer_state_t state) {
             break;
         case SYST:
             rgb_matrix_set_color_all(128, 0, 0);  // Red for system layer
-            break;
-        case NAVI:
-            rgb_matrix_set_color_all(0, 128, 0);  // Green for navigation
-            break;
-        case SYMB:
-            rgb_matrix_set_color_all(128, 128, 0); // Yellow for symbols
-            break;
-        case GAME:
-            rgb_matrix_set_color_all(128, 0, 128); // Purple for gaming
             break;
         default:
             // Return to layout-specific color

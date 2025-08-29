@@ -6,10 +6,6 @@
 #include "unicode.h"
 #endif
 
-#ifdef VIM_NAVIGATION_ENABLE
-#include "vim_navigation.h"
-#endif
-
 #ifdef RGB_MATRIX_ENABLE
 #include "rgb_matrix.h"
 #endif

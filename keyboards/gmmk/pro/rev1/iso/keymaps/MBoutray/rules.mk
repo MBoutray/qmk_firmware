@@ -39,10 +39,7 @@ SPACE_CADET_ENABLE = no       # Disable space cadet to save space
 SRC += features/custom_keycodes.c
 SRC += features/rgb_matrix.c
 SRC += features/unicode.c
-SRC += features/vim_navigation.c
 SRC += layout/azerty_afnor.c
-SRC += layout/bepo.c
-SRC += layout/qwerty.c
 
 # Include paths
 VPATH += keyboards/gmmk/pro/rev1/iso/keymaps/mboutray/features

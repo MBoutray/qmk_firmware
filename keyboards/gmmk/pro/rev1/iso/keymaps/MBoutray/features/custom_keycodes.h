@@ -7,27 +7,8 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record);
 
 /* Custom Keycodes */
 enum custom_keycodes {
-    // Layout switching
-    LAY_AZE_STD = SAFE_RANGE,   // Switch to AZERTY Standard
-    LAY_AZE_AFN,                // Switch to AZERTY Afnor
-    LAY_QWE,                    // Switch to QWERTY
-    LAY_BPO,                    // Switch to BÉPO
-
-    // Vim-style navigation
-    VIM_H,                      // Left (with modifiers)
-    VIM_J,                      // Down (with modifiers)
-    VIM_K,                      // Up (with modifiers)
-    VIM_L,                      // Right (with modifiers)
-    VIM_W,                      // Word forward
-    VIM_B,                      // Word backward
-    VIM_E,                      // End of word
-    VIM_0,                      // Beginning of line
-    VIM_DLR,                    // End of line
-    VIM_GG,                     // Beginning of document
-    VIM_G,                      // End of document
-
     // AZERTY Afnor specific keycodes
-    AF_AT,
+    AF_AT = SAFE_RANGE,
     AF_AGRV,
     AF_EACU,
     AF_EGRV,
@@ -75,14 +56,6 @@ enum custom_keycodes {
     AF_COMM,
     AF_COLN,
     AF_SCLN,
-
-    // Smart brackets
-    SMART_PAREN,                // ()
-    SMART_BRACKET,              // []
-    SMART_BRACE,                // {}
-    SMART_ANGLE,                // <>
-    SMART_QUOTE,                // ""
-    SMART_SQUOTE,               // ''
 
     // RGB Matrix
     RM_NONE,
@@ -132,64 +105,29 @@ enum custom_keycodes {
     RM_SOLID_SPLASH,
     RM_SOLID_MULTISPLASH,
 
-
-    // Special functions
-    CMD_TAB,                // Cmd-Tab for macOS
-    CLIPBOARD_COPY,         // Cross-platform copy
-    CLIPBOARD_PASTE,        // Cross-platform paste
-    CLIPBOARD_CUT,          // Cross-platform cut
-
     // Custom safe range for user
     NEW_SAFE_RANGE
 };
 
 /* Layer definitions */
 enum layers {
-    AZE_STD_BASE = 0,           // Base layer - AZERTY layout
-    AZE_AFN_BASE,           // Base layer - AZERTY layout, AFNOR version
-    QWE_BASE,               // Base layer - QWERTY layout
-    BEP_BASE,               // Base layer - BÉPO layout
+    BASE = 0,           // Base layer
     FUNC,                   // Function layer
-    NAVI,                   // Navigation layer
-    SYMB,                   // Symbols layer
     NUMP,                   // Numpad layer
-    GAME,                   // Gaming layer (no custom keys)
     SYST,                   // System administration layer
     RGB_MAT,                // RGB control layer
 };
 
-/* Layout types */
-enum layout_types {
-    LAYOUT_AZERTY_STANDARD = 0,
-    LAYOUT_AZERTY_AFNOR,
-    LAYOUT_QWERTY,
-    LAYOUT_BEPO,
-    LAYOUT_COUNT
-};
-
-/* Helper macros for cleaner keymap */
-#define NAV_H VIM_H
-#define NAV_J VIM_J
-#define NAV_K VIM_K
-#define NAV_L VIM_L
-
 /* Momentary layer shortcuts */
 #define MO_FUNC MO(FUNC)
 #define MO_SYST MO(SYST)
-#define MO_NAVI MO(NAVI)
-#define MO_SYMB MO(SYMB)
 #define MO_RGB  MO(RGB_MAT)
 
-/* Layer-tap shortcuts */
-#define LT_NAVI LT(NAVI, KC_CAPS)
-
 /* Layer toggle shortcuts */
-#define TG_GAME TG(GAME)
 #define TG_NUMP TG(NUMP)
 #define TG_SYST TG(SYST)
 #define TG_RGB  TG(RGB_MAT)
 
 /* Turn on a layer, turn off the rest (except base) */
-#define TO_SYST TO(SYST)
-#define TO_GAME TO(GAME)
 #define TO_NUMP TO(NUMP)
+#define TO_SYST TO(SYST)
